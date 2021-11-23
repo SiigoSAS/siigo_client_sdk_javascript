@@ -1,7 +1,7 @@
-// user.model.js
+// auth.model.js
 var mongoose = require("mongoose");
 // Setup schema
-var userSchema = mongoose.Schema({
+var authSchema = mongoose.Schema({
   userName: {
     type: String,
     required: true
@@ -15,8 +15,9 @@ var userSchema = mongoose.Schema({
     default: Date.now
   }
 });
-// Export User model
-var User = (module.exports = mongoose.model("user", userSchema));
+// Export Auth model
+var Auth = (module.exports = mongoose.model("auth", userSchema));
+
 module.exports.get = function (callback, limit) {
-  User.find(callback).limit(limit);
+  Auth.find(callback).limit(limit);
 };
