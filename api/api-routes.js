@@ -8,39 +8,11 @@ router.get("/", function (req, res) {
     message: "Welcome to RESTHub crafted with love!"
   });
 });
-
 // Import user controller
-var example = require("./controllers/example.controller");
+var AuthController = require("./controllers/auth.controller");
+var InvoiceController = require('./controllers/invoice.controller')
 // user routes
-router
-  .route("/example")
-  .get(example.index)
-  .post(example.new);
-
-//  router
-//   .route("/user/:user_id")
-//   .get(userController.view)
-//   .patch(userController.update)
-//   .put(userController.update)
-//   .delete(userController.delete);
-// router.route("/user/authenticate").post(userController.authenticate);
-// router
-//   .route("/user/changepassword/:user_id")
-//   .put(userController.changePassword);
-
-// Import Contact controller
-// var contactController = require("./controllers/contact.controller");
-// // Contact routes
-// router
-//   .route("/contacts")
-//   .get(contactController.index)
-//   .post(contactController.new);
-// router
-//   .route("/contact/:contact_id")
-//   .get(contactController.view)
-//   .patch(contactController.update)
-//   .put(contactController.update)
-//   .delete(contactController.delete);
-
+router.route("/auth").post(AuthController.login);
+router.route("/invoice").post(InvoiceController.createInvoice);
 // Export API routes
 module.exports = router;

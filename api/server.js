@@ -55,7 +55,6 @@ let apiRoutes = require("./api-routes");
 // Use Api routes in the App
 app.use("/api", apiRoutes);
 
-
 app.get("*", (req, res) => {
   if (allowedExt.filter((ext) => req.url.indexOf(ext) > 0).length > 0) {
     res.sendFile(path.resolve(`public/${req.url}`));
@@ -65,7 +64,7 @@ app.get("*", (req, res) => {
 });
 
 // use JWT auth to secure the api, the token can be passed in the authorization header or querystring
-app.use(
+/* app.use(
   expressJwt({
     secret: environment.secret,
     algorithms: ["HS256"],
@@ -90,7 +89,7 @@ app.use(
     ]
   })
 );
-
+ */
 
 
 
