@@ -1,6 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AuthGuard } from "@core/guards";
+import { CreateCustomerComponent } from './feature/customer/create-customer/create-customer.component';
+import { CreateInvoiceComponent } from './feature/invoice/create-invoice/create-invoice.component';
+import { CreateProductComponent } from './feature/product/create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -11,7 +14,26 @@ const routes: Routes = [
     path: "contacts",
     canActivate: [AuthGuard],
     loadChildren: () => import("./feature/contact/contact.module").then((module) => module.ContactModule)
-  }
+  },
+  {
+    path:'create-customer',
+    component:
+    CreateCustomerComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'create-invoice',
+    component:
+    CreateInvoiceComponent,
+    pathMatch: 'full'
+  },
+  {
+    path:'create-product',
+    component:
+    CreateProductComponent,
+    pathMatch: 'full'
+  },
+
 ];
 
 @NgModule({
