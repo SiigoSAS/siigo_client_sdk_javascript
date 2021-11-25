@@ -19,13 +19,13 @@ exports.login = async function (req, res) {
     );
     res.json({
       status: "success",
-      data: { Authentification: "Authentified Successfully"}
+      data: { Authentication: "Authentication Successfully"}
     })
   } catch (error) {
     res.status(400).json({
       status: "error",
       message:  { 
-        Authentification: "Authentified Failed",
+        Authentication: "Authentication failed",
         error: error
     }
     });
