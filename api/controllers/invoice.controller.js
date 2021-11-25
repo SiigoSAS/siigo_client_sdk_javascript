@@ -39,7 +39,7 @@ exports.createInvoice = async function (req, res) {
     console.log(data);
     res.status(201).send({ data });
   } catch (error) {
-    res.status(201).json({ 
+    res.json({ 
       status: "Error",
       message: "Something was wrong",
       error: error
@@ -47,6 +47,25 @@ exports.createInvoice = async function (req, res) {
   }
 };
 
-exports.getInvoice = async (req, res) => {}; //se puede usar este mismo endpoint para obtener varias o una por guid
+exports.getInvoice = async (req, res) => {
+  if(req.params.id == undefined) {
+    res.status(200).json({
+      status: "success",
+      message: "getInvoices works!"
+    });
+  } else {
+    console.log(req.params.id);
+    res.status(200).json({
+      status: "success",
+      message: "getInvoice works!"
+    });    
+  }
+}; //se puede usar este mismo endpoint para obtener varias o una por guid
 
-exports.getInvoicePDF = async (req, res) => {};
+exports.getInvoicePDF = async (req, res) => {
+  console.log(req.params.id);
+  res.status(200).json({
+    status: "success",
+    message: "getInvoicePDF works!"
+  });
+};

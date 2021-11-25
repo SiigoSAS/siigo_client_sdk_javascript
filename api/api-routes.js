@@ -14,9 +14,24 @@ var authValidation = require('./middlewares/authValidation');
 var AuthController = require("./controllers/auth.controller");
 var InvoiceController = require('./controllers/invoice.controller');
 var DocumentTypeController = require('./controllers/documentType.controller');
+var CustomerController = require('./controllers/customer.controller');
+var ProductController = require('./controllers/product.controller');
 // user routes
 router.route("/auth").post(AuthController.login);
-router.route("/invoice").post(authValidation, InvoiceController.createInvoice);
+router
+  .post("/invoice/",authValidation, InvoiceController.createInvoice)
+  .get("/invoice/:id?", authValidation, InvoiceController.getInvoice)
+  .get("/invoice/:id?/PDF" ,authValidation, InvoiceController.getInvoicePDF)
 router.route("/documentType/:type").get(authValidation, DocumentTypeController.getDocumentTypes);
+router.route('/customer/:id?')
+  .post(authValidation, CustomerController.createCustomer)
+  .get(authValidation, CustomerController.getCustomer)
+  .put(authValidation, CustomerController.updateCustomer)
+  .delete(authValidation, CustomerController.deleteCustomer);
+router.route('/product/:id?')
+  .post(authValidation, ProductController.createProduct)
+  .get(authValidation,  ProductController.getProduct)
+  .put(authValidation, ProductController.updateProduct)
+  .delete(authValidation, ProductController.deleteProduct);
 // Export API routes
-module.exports = router;
+module.exports = router; 

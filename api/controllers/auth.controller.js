@@ -17,12 +17,12 @@ exports.login = async function (req, res) {
         accessKey: req.body.access_key,
       }
     );
-    res.json({
+    res.status(200).json({
       status: "success",
       data: { Authentication: "Authentication Successfully"}
     })
   } catch (error) {
-    res.status(400).json({
+    res.json({
       status: "error",
       message:  { 
         Authentication: "Authentication failed",

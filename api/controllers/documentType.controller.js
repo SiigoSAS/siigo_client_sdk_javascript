@@ -13,6 +13,10 @@ exports.getDocumentTypes = async (req, res) => {
     const data = await apiInstance.getDocumentTypes(opts);
     res.status(200).json({ data });
   } catch (error) {
-    console.error(error);
+    res.json({ 
+      status: "Error",
+      message: "Something was wrong",
+      error: error
+    });
   }
 }
