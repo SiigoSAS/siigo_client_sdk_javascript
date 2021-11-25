@@ -8,39 +8,30 @@ router.get("/", function (req, res) {
     message: "Welcome to RESTHub crafted with love!"
   });
 });
-
+// Import Middlewares
+var authValidation = require('./middlewares/authValidation');
 // Import user controller
-var example = require("./controllers/example.controller");
+var AuthController = require("./controllers/auth.controller");
+var InvoiceController = require('./controllers/invoice.controller');
+var DocumentTypeController = require('./controllers/documentType.controller');
+var CustomerController = require('./controllers/customer.controller');
+var ProductController = require('./controllers/product.controller');
 // user routes
+router.route("/auth").post(AuthController.login);
 router
-  .route("/example")
-  .get(example.index)
-  .post(example.new);
-
-//  router
-//   .route("/user/:user_id")
-//   .get(userController.view)
-//   .patch(userController.update)
-//   .put(userController.update)
-//   .delete(userController.delete);
-// router.route("/user/authenticate").post(userController.authenticate);
-// router
-//   .route("/user/changepassword/:user_id")
-//   .put(userController.changePassword);
-
-// Import Contact controller
-// var contactController = require("./controllers/contact.controller");
-// // Contact routes
-// router
-//   .route("/contacts")
-//   .get(contactController.index)
-//   .post(contactController.new);
-// router
-//   .route("/contact/:contact_id")
-//   .get(contactController.view)
-//   .patch(contactController.update)
-//   .put(contactController.update)
-//   .delete(contactController.delete);
-
+  .post("/invoice/",authValidation, InvoiceController.createInvoice)
+  .get("/invoice/:id?", authValidation, InvoiceController.getInvoice)
+  .get("/invoice/:id?/PDF" ,authValidation, InvoiceController.getInvoicePDF)
+router.route("/documentType/:type").get(authValidation, DocumentTypeController.getDocumentTypes);
+router.route('/customer/:id?')
+  .post(authValidation, CustomerController.createCustomer)
+  .get(authValidation, CustomerController.getCustomer)
+  .put(authValidation, CustomerController.updateCustomer)
+  .delete(authValidation, CustomerController.deleteCustomer);
+router.route('/product/:id?')
+  .post(authValidation, ProductController.createProduct)
+  .get(authValidation,  ProductController.getProduct)
+  .put(authValidation, ProductController.updateProduct)
+  .delete(authValidation, ProductController.deleteProduct);
 // Export API routes
-module.exports = router;
+module.exports = router; 
