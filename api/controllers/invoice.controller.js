@@ -11,33 +11,21 @@ exports.createInvoice = async function (req, res) {
     let opts = {
       createInvoiceCommand: {
         document: {
-          id: 115057
+          id: req.body.document.id
         },
-        date: "2020-12-04",
+        date: req.body.date,
         customer: {
-          identification: "1636671963141",
-          branch_office: "0"
+          identification: req.body.customer.identification,
+          branch_office: req.body.customer.branch_office
         },
-        seller: "18620",
-        items: [
-          {
-            code: "1215",
-            quantity: "1",
-            price: 1000
-          }
-        ],
-        payments: [
-          {
-            id: 34450,
-            value: 1000
-          }
-        ]
+        seller: req.body.seller,
+        items: req.body.items,
+        payments: req.body.payments
       }
     };
 
     data = await apiInstance.createInvoice(opts);
-    console.log(data);
-    res.status(201).send({ data });
+    res.status(201).json( data );
   } catch (error) {
     res.json({ 
       status: "Error",
