@@ -1,0 +1,47 @@
+.auth-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+  padding: 0 24px;
+}
+.username-field {
+  max-width: 100%;
+  min-width: 100%;
+}
+.password-field {
+  width: 100%;
+ 
+}
+.form-container {
+  max-width: 400px;
+  max-height: 400px;
+}
+.body-container{
+  position: relative;
+  top: 13rem;
+  left: 43rem;
+}
+p{
+  font-size: 65px;
+  margin: 10px;
+  position: relative;
+  left: 6rem;
+  .material-icons{
+    font-size: 150px
+  }
+}
+.btn{
+  display: block;
+  width: 80%;
+  padding: 1% !important;
+  font-size: 1.5em;
+  font-weight: 200;
+  margin-top: 18px;
+  position: relative;
+  left: 10%;
+}
+.custom-btn{
+  margin-bottom: 15px;
+  background: #546EFF ;
+  color: #fff;
+}

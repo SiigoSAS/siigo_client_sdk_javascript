@@ -1,1 +1,36 @@
-<p>auth works!</p>
+<form autocomplete="off">
+  <div class="form-container">
+    <mat-card class="body-container">
+
+      <div class="form-header">
+        <p><mat-icon class="icon-access" aria-hidden="false">account_circle</mat-icon></p>
+      </div>
+
+      <div class="auth-form">
+
+        <div class="user-container">
+          <mat-form-field class="username-field" appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="email" required />
+            <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="password-container">
+          <mat-form-field class="password-field" appearance="fill">
+            <mat-label>Access Key</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" />
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <div class="button-access">
+          <button mat-raised-button class="btn custom-btn">Access</button>
+        </div>
+
+      </div>
+    </mat-card>
+  </div>
+</form>

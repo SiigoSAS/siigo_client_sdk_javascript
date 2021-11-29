@@ -12,6 +12,13 @@ import { AuthComponent } from './feature/auth/auth.component';
 import { CreateCustomerComponent } from './feature/customer/create-customer/create-customer.component';
 import { CreateProductComponent } from './feature/product/create-product/create-product.component';
 
+import {MatCard, MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
+
+
 @NgModule({
   declarations: [AppComponent, CreateInvoiceComponent, AuthComponent, CreateCustomerComponent, CreateProductComponent],
   imports: [
@@ -19,7 +26,11 @@ import { CreateProductComponent } from './feature/product/create-product/create-
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    MatCardModule,
+    MatInputModule,
+    MatIconModule, 
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
