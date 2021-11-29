@@ -11,7 +11,7 @@ exports.getDocumentTypes = async (req, res) => {
     'type': req.params.type
     };
     const data = await apiInstance.getDocumentTypes(opts);
-    res.status(200).json({ data });
+    res.status(200).json( data );
   } catch (error) {
     res.json({ 
       status: "Error",

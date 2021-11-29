@@ -26,7 +26,7 @@ exports.getCustomer = async (req, res) => {
       };
   
       data = await apiInstance.getCustomers(opts);
-      res.status(200).json({ data });
+      res.status(200).json( data );
     } catch (error) {
       res.json({ 
         status: "Error",
@@ -40,7 +40,7 @@ exports.getCustomer = async (req, res) => {
       let id = req.params.id; 
   
       data = await apiInstance.getCustomer(id);
-      res.status(200).json({ data });
+      res.status(200).json( data );
     } catch (error) {
       res.json({ 
         status: "Error",
