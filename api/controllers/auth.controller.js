@@ -1,4 +1,4 @@
-// userController.js
+// auhtController.js
 // Import user model
 var SiigoApi = require('siigo_api');
 // Handle index actions
@@ -32,4 +32,4 @@ exports.login = async function (req, res) {
   }
 };
 
-exports.SiigoApi = SiigoApi
+exports.SiigoApi = SiigoApi;

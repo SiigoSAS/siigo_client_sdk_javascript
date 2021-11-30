@@ -59,7 +59,6 @@ exports.createCustomer = async (req, res) => {
 };
 
 exports.updateCustomer = async (req, res) => {
-  console.log(req.params.id);
   res.status(200).json({
     status: "success",
     message: "updateCustomer works!"
@@ -67,7 +66,6 @@ exports.updateCustomer = async (req, res) => {
 };
 
 exports.deleteCustomer = async (req, res) => {
-  console.log(req.params.id);
   res.status(200).json({
     status: "success",
     message: "deleteCustomer works!"
