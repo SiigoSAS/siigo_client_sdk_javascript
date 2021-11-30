@@ -22,9 +22,10 @@ var TaxController = require('./controllers/tax.controller');
 // user routes
 router.route("/auth").post(AuthController.login);
 router
-  .post("/invoice/",authValidation, InvoiceController.createInvoice)
+  .post("/invoice",authValidation, InvoiceController.createInvoice)
   .get("/invoice/:id?", authValidation, InvoiceController.getInvoice)
   .get("/invoice/:id?/PDF" ,authValidation, InvoiceController.getInvoicePDF)
+  .get("/invoice/:id?/errors" ,authValidation, InvoiceController.getElectronicInvoiceErrors)
 router.route("/documentType/:type").get(authValidation, DocumentTypeController.getDocumentTypes);
 router.route('/customer/:id?')
   .post(authValidation, CustomerController.createCustomer)
