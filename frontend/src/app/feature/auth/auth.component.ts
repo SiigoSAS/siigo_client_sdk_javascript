@@ -32,8 +32,7 @@ export class AuthComponent implements OnInit {
     }else{      
       this._authService.login(this.authData).subscribe(
         (res)=>{
-          console.log(res);
-          
+          console.log(res);          
           this._router.navigate(['/list-invoices'])  
         },
         (err)=>{

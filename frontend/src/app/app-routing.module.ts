@@ -7,6 +7,7 @@ import { CreateProductComponent } from './feature/product/create-product/create-
 import { AuthComponent } from './feature/auth/auth.component';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 
+
 const routes: Routes = [
   // {
   //   path: "",
@@ -46,7 +47,7 @@ const routes: Routes = [
     component:
       ListInvoicesComponent,
     pathMatch: 'full'
-  },
+  },  
 
 ];
 

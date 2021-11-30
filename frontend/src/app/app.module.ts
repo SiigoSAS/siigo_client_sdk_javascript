@@ -14,19 +14,23 @@ import { CreateCustomerComponent } from './feature/customer/create-customer/crea
 import { CreateProductComponent } from './feature/product/create-product/create-product.component';
 
 //ANGULAR MATERIAL COMPONENTS
-import {MatCard, MatCardModule} from '@angular/material/card';
+import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 //SERVICE COMPONENTS
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
+import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.component';
+
 
 
 
 @NgModule({
-  declarations: [AppComponent, CreateInvoiceComponent, AuthComponent, CreateCustomerComponent, CreateProductComponent, ListInvoicesComponent],
+  declarations: [AppComponent, CreateInvoiceComponent, AuthComponent, CreateCustomerComponent, CreateProductComponent, ListInvoicesComponent, LeftSidebarComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),
     AppRoutingModule,
@@ -38,6 +42,7 @@ import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invo
     MatIconModule, 
     MatButtonModule,
     HttpClientModule,
+    MatTableModule,
     
   
   ],

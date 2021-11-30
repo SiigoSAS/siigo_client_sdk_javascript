@@ -1,0 +1,15 @@
+<div>
+  <div class="text-center my-2">
+    <img src="../../../assets/img/siigo.png" alt="" class="img-fluid mt-2 text-center" style="width: 25vh" />
+  </div>
+  <button class="w-100" mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="invoiceOptions=!invoiceOptions">
+    <mat-icon style="color: white;">article</mat-icon>
+  </button>
+  <button class="w-100" mat-icon-button aria-label="Example icon button with a vertical three dot icon" *ngIf="invoiceOptions">
+   <p class="fs-5" style="color: white;">Create</p> 
+  </button>
+  <button class="w-100" mat-icon-button aria-label="Example icon button with a vertical three dot icon" *ngIf="invoiceOptions">
+    <p class="fs-5" style="color: white;">List</p>
+  </button>
+  
+</div>

@@ -5,13 +5,15 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class InvoiceService {
+export class CustomerService {
   env:string;
-  constructor( private _http: HttpClient) {
+
+  constructor(private _http:HttpClient) {
     this.env=environment.apiEndpoint
    }
 
-   getInvoices(){
-     return this._http.get<any>(this.env+'invoice')
-   }
+   getCustomer(id:string){
+     return this._http.get<any>(this.env+'customer/'+id)
+       }
 }
+
