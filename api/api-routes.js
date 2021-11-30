@@ -16,6 +16,9 @@ var InvoiceController = require('./controllers/invoice.controller');
 var DocumentTypeController = require('./controllers/documentType.controller');
 var CustomerController = require('./controllers/customer.controller');
 var ProductController = require('./controllers/product.controller');
+var PaymentTypesController = require('./controllers/paymentTypes.controller');
+var UsersController = require('./controllers/users.controller');
+var TaxController = require('./controllers/tax.controller');
 // user routes
 router.route("/auth").post(AuthController.login);
 router
@@ -33,5 +36,8 @@ router.route('/product/:id?')
   .get(authValidation,  ProductController.getProduct)
   .put(authValidation, ProductController.updateProduct)
   .delete(authValidation, ProductController.deleteProduct);
+router.route('/paymentTypes/:type').get(authValidation, PaymentTypesController.getPaymentTypes);
+router.route('/users').get(authValidation, UsersController.getUsers);
+router.route('/taxes').get(authValidation, TaxController.getTaxes);
 // Export API routes
 module.exports = router; 
