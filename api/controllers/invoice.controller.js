@@ -3,6 +3,7 @@
 var SiigoInstance = require("./auth.controller");
 // Handle index actions
 const environment = require("../config/environment");
+const { InvoiceApi } = require("siigo_api");
 
 exports.createInvoice = async function (req, res) {
   let data = {};
@@ -86,7 +87,7 @@ exports.getInvoicePDF = async (req, res) => {
     let id = req.params.id;
     console.log(id);
     const data = await apiInstance.getInvoicePDF(id);
-    res.status(200).json( data );
+    res.status(201).json( data );
   } catch (error) {
     res.json({ 
       status: "Error",
