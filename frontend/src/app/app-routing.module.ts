@@ -5,6 +5,7 @@ import { CreateCustomerComponent } from './feature/customer/create-customer/crea
 import { CreateInvoiceComponent } from './feature/invoice/create-invoice/create-invoice.component';
 import { CreateProductComponent } from './feature/product/create-product/create-product.component';
 import { AuthComponent } from './feature/auth/auth.component';
+import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 
 const routes: Routes = [
   // {
@@ -38,6 +39,12 @@ const routes: Routes = [
     path: 'create-product',
     component:
       CreateProductComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'list-invoices',
+    component:
+      ListInvoicesComponent,
     pathMatch: 'full'
   },
 

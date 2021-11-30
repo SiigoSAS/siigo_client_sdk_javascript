@@ -1,36 +1,32 @@
-<form autocomplete="off">
-  <div class="form-container">
-    <mat-card class="body-container">
-
-      <div class="form-header">
-        <p><mat-icon class="icon-access" aria-hidden="false">account_circle</mat-icon></p>
+<div class="container-fluid">
+  <div class="row">    
+    <div class="login-container col-md-3 justify-content-center " style="height: 100vh; background:#2E3E6B">
+      <div class="text-center my-2">
+        <img src="../../../assets/img/siigo.png" alt="" class="img-fluid mt-2 text-center" style="width:25vh;">
+      </div>   
+      <p class="fs-4 text-center" style="color: white;">Login in to your account</p>        
+      <div class="text-center" style="border-radius:1rem; ">
+        <mat-form-field class="w-100" appearance="fill" style="border-radius:1rem;" style="color: white;">
+          <mat-label>Enter your username</mat-label>
+          <input matInput [formControl]="username" [(ngModel)]="authData.username" required>
+          <mat-error *ngIf="username.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
       </div>
-
-      <div class="auth-form">
-
-        <div class="user-container">
-          <mat-form-field class="username-field" appearance="fill">
-            <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="email" required />
-            <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
-          </mat-form-field>
-        </div>
-
-        <div class="password-container">
-          <mat-form-field class="password-field" appearance="fill">
-            <mat-label>Access Key</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" />
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-
-        <div class="button-access">
-          <button mat-raised-button class="btn custom-btn">Access</button>
-        </div>
-
+      <div class="text-center" style="border-radius:1rem; ">
+        <mat-form-field class="w-100" appearance="fill">
+          <mat-label>Enter your access key</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="authData.access_key" style="color: white;" required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide accesskey'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
       </div>
-    </mat-card>
+      <div class="text-center" style="border-radius:1rem; ">
+        <button class="w-100" mat-button style="background-color: white;"(click)="login()">Login</button>
+      </div>
+    </div>
+    <div class="col-md-9 p-0 " style="background-color: #7F92B2; height:100vh;">      
+        <img src="../../../assets/img/wallpaperLogin.jpg" alt="" class="img-fluid" style="width: 100%; height:100%">      
+    </div>
   </div>
-</form>
+</div>
