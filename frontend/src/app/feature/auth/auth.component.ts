@@ -36,7 +36,7 @@ export class AuthComponent implements OnInit {
           this._router.navigate(['/list-invoices'])  
         },
         (err)=>{
-          console.log(err);          
+          console.log(err);           
         }
       )
     }

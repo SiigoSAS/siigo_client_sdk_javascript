@@ -11,8 +11,8 @@ export class InvoiceService {
     this.env=environment.apiEndpoint
    }
 
-   getInvoices(){
-     return this._http.get<any>(this.env+'invoice')
+   getInvoices(opts:any){
+     return this._http.get<any>(this.env+'invoice',opts)
    }
    getInvoicePDF(id: string){
     return this._http.get<any>(this.env + 'invoice/' + id + '/PDF');
