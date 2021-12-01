@@ -7,17 +7,20 @@ const environment = require("../config/environment");
 exports.login = async function (req, res) {
   if (!req.body.username || !req.body.access_key)
     res.status(400).send("Error: Incomplete Data");
-  try {
 
-    SiigoApi.initialize(
+  SiigoApi.initialize(
       {
         basePath: "https://servicesqa.siigo.com/alliances/api/siigoapi",
         urlSignIn: "https://servicesqa.siigo.com/alliances/api/siigoapi-users/v1/sign-in",
-        userName: req.body.username,
-        accessKey: req.body.access_key,
       }
     );
-    res.status(200).json({
+   try {
+   await SiigoApi.signIn({
+    userName: req.body.username,
+    accessKey: req.body.access_key
+   })
+
+   res.status(200).json({
       status: "success",
       data: { Authentication: "Authentication Successfully"}
     })
