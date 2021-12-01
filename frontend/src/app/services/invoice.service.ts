@@ -14,4 +14,7 @@ export class InvoiceService {
    getInvoices(){
      return this._http.get<any>(this.env+'invoice')
    }
+   getInvoicePDF(id: string){
+    return this._http.get<any>(this.env + 'invoice/' + id + '/PDF');
+   }
 }

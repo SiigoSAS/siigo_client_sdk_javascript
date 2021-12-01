@@ -1,0 +1,11 @@
+DOCUMENTATION=https://www.npmjs.com/package/siigo_api
+EXPRESS_PORT=3000
+SECRET=Thisismysecret
+MONGO_DB_USERNAME=root
+MONGO_DB_PASSWORD=root
+MONGO_DB_HOST=localhost
+MONGO_DB_PORT=27137
+MONGO_DB_PARAMETERS=
+MONGO_DB_DATABASE=new
+basePath=https://YOUR-BASE-PATH
+urlSignIn=https://YOUR-URL-SIGN-IN
