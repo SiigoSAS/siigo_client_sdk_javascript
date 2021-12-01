@@ -14,4 +14,8 @@ module.exports = {
       process.env.MONGO_DB_PARAMETERS,
   },
   secret: process.env.SECRET,
+  path: {
+	sign:process.env.URL_SIGN_IN,
+	api:process.env.BASE_PATH
+ }
 };

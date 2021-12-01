@@ -1,11 +1,11 @@
 // invoiceController.js
 // Import user model
-var SiigoInstance = require("./auth.controller");
+const SiigoInstance = require('./auth.controller')
 // Handle index actions
-const environment = require("../config/environment");
+const environment = require('../config/environment')
 
 exports.createInvoice = async function (req, res) {
-  let opts = {
+  const opts = {
     document: {
       id: req.body.document.id
     },
@@ -17,27 +17,27 @@ exports.createInvoice = async function (req, res) {
     seller: req.body.seller,
     items: req.body.items,
     payments: req.body.payments
-  };
+  }
 
   try {
-    let apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
+    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
 
-    let data = await apiInstance.createInvoice(opts);
-    res.status(201).json(data);
+    const data = await apiInstance.createInvoice(opts)
+    res.status(201).json(data)
   } catch (error) {
     res.json({
-      status: "Error",
-      message: "Something was wrong",
+      status: 'Error',
+      message: 'Something was wrong',
       error: error
-    });
+    })
   }
-};
+}
 
 exports.getInvoice = async (req, res) => {
   if (req.params.id == undefined) {
     try {
-      let apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
-      let opts = {
+      const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
+      const opts = {
         documentId: req.body.documentId,
         customerIdentification: req.body.customerIdentification,
         customerBranchOffice: req.body.customerBranchOffice,
@@ -50,60 +50,60 @@ exports.getInvoice = async (req, res) => {
         updatedEnd: req.body.updatedEnd,
         page: req.body.page,
         pageSize: req.body.pageSize
-      };
+      }
 
-      const data = await apiInstance.getInvoices(opts);
-      res.status(200).json(data);
+      const data = await apiInstance.getInvoices(opts)
+      res.status(200).json(data)
     } catch (error) {
       res.json({
-        status: "Error",
-        message: "Something was wrong",
+        status: 'Error',
+        message: 'Something was wrong',
         error: error
-      });
+      })
     }
   } else {
     try {
-      let apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
-      let id = req.params.id;
+      const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
+      const id = req.params.id
 
-      const data = await apiInstance.getInvoice(id);
-      res.status(200).json(data);
+      const data = await apiInstance.getInvoice(id)
+      res.status(200).json(data)
     } catch (error) {
       res.json({
-        status: "Error",
-        message: "Something was wrong",
+        status: 'Error',
+        message: 'Something was wrong',
         error: error
-      });
+      })
     }
   }
-};
+}
 
 exports.getInvoicePDF = async (req, res) => {
   try {
-    let apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
-    let id = req.params.id;
-    const data = await apiInstance.getInvoicePDF(id);
-    res.status(200).json(data);
+    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
+    const id = req.params.id
+    const data = await apiInstance.getInvoicePDF(id)
+    res.status(200).json(data)
   } catch (error) {
     res.json({
-      status: "Error",
-      message: "Something was wrong",
+      status: 'Error',
+      message: 'Something was wrong',
       error: error
-    });
+    })
   }
-};
+}
 
 exports.getElectronicInvoiceErrors = async (req, res) => {
   try {
-    let apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
-    let id = req.params.id;
-    const data = await apiInstance.getElectronicInvoiceErrors(id);
-    res.status(200).json(data);
+    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
+    const id = req.params.id
+    const data = await apiInstance.getElectronicInvoiceErrors(id)
+    res.status(200).json(data)
   } catch (error) {
     res.json({
-      status: "Error",
-      message: "Something was wrong",
+      status: 'Error',
+      message: 'Something was wrong',
       error: error
-    });
+    })
   }
-};
+}
