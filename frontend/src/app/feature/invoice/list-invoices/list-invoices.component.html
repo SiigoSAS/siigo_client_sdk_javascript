@@ -55,7 +55,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
           <tr class="mat-row" *matNoDataRow>
-            <td class="mat-cell" colspan="4">No data matching the filter "{{ input.value }}"</td>
+            <ng-http-loader></ng-http-loader>
           </tr>
         </table>
         <mat-paginator [pageSizeOptions]="[20, 40, 50]"

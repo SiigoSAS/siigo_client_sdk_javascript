@@ -6,7 +6,7 @@ import { CustomerService } from "../../../services/customer.service";
 import { MatPaginator } from "@angular/material/paginator";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { forkJoin, of } from "rxjs";
-import { InvoiceViewModel } from "../models/invoice_view_model.interface";
+import { ListInvoiceViewModel } from "../models/list-invoice-view-model.interface";
 
 @Component({
   selector: "app-list-invoices",
@@ -14,9 +14,9 @@ import { InvoiceViewModel } from "../models/invoice_view_model.interface";
   styleUrls: ["./list-invoices.component.scss"]
 })
 export class ListInvoicesComponent implements OnInit {
-  listInvoice: InvoiceViewModel[] = [];
+  listInvoice: ListInvoiceViewModel[] = [];
   displayedColumns: string[] = ["paymentType", "documentName", "date", "customerIdentification", "customerName", "totalPrice"];
-  dataSource = new MatTableDataSource<InvoiceViewModel>();
+  dataSource = new MatTableDataSource<ListInvoiceViewModel>();
   opts: any = { page: 1, pageSize: 100 };
 
   applyFilter(event: Event) {
