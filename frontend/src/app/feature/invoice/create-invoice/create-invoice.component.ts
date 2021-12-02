@@ -34,7 +34,16 @@ const ELEMENT_DATA: invoice[] = [
 
 
 export class CreateInvoiceComponent implements OnInit, OnDestroy {
-  values: InvoiceViewModel = {price: 0, total: 0, amount: 0};
+  values: InvoiceViewModel = {
+    price: 0, 
+    total: 0, 
+    amount: 0, 
+    totalB: 0, 
+    subTotal: 0, 
+    totalNeto: 0, 
+    totalPay: 0,
+    selectedProduct: '',
+  };
   paymentTypes: PaymentType[] = [];
   documentTypes: DocumentType[] = [];
   customers: [];
@@ -77,7 +86,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
   
   selectProduct(selectedProduct){
-    this.selectedProduct = selectedProduct;
+    this.values.selectedProduct = selectedProduct;
   }
 
   getSuggestionCustomer() {
@@ -128,5 +137,13 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   
   calculate(){
     this.values.total = this.values.amount * this.values.price;
+    this.values.totalB = this.values.total;
+    this.values.subTotal = this.values.total;
+    this.values.totalNeto = this.values.total;
+    this.values.totalPay = this.values.total;
+  }
+
+  saveInvoice(){
+    
   }
 }
