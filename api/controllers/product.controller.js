@@ -35,7 +35,6 @@ exports.getProduct = async (req, res) => {
       })
     }
   } else {
-    console.log(req.params.id)
     try {
       const apiInstance = new SiigoInstance.SiigoApi.ProductApi()
       const id = req.params.id
@@ -60,7 +59,6 @@ exports.createProduct = async (req, res) => {
 }
 
 exports.updateProduct = async (req, res) => {
-  console.log(req.params.id)
   res.status(200).json({
     status: 'success',
     message: 'updateProduct works!'
@@ -68,7 +66,6 @@ exports.updateProduct = async (req, res) => {
 }
 
 exports.deleteProduct = async (req, res) => {
-  console.log(req.params.id)
   res.status(200).json({
     status: 'success',
     message: 'deleteProduct works!'
