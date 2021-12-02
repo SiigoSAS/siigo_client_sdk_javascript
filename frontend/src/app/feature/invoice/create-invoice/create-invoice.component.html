@@ -30,7 +30,7 @@
               </td>
             </ng-container>
 
-            
+
             <ng-container matColumnDef="amount" >
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Amount</th>
               <td mat-cell *matCellDef="let element" style="width: 10px;">
@@ -85,7 +85,7 @@
               <mat-icon>add</mat-icon>
             </button>
           </div>
-         
+
         </mat-card>
         <!-- CLOSE ITEMS INFORMATION -->
 
@@ -148,7 +148,7 @@
                         <div class="col-md-9 my-3 overflow-auto" style="color: black">
                             <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
                           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                      
+
                         </div>
                         <div class="form-group">
                             <label for="colFormLabel" class="col-form-label" style="color: black">Total forms of payment</label>
@@ -179,12 +179,11 @@
                   </div>
                   <div class="col-md-6 overflow-auto">
                     <p class="my-4" style="color: black">Customer*</p>
-                    <select class="mx-2 form-select" aria-label="Default select example">
-                        <option selected>Select*</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+                    <app-search-list-bar
+                      [suggestions]="customers"
+                      (onSelect)="selectCustomer($event)"
+                      (onLoad)="getSuggestionCustomer()"
+                    ></app-search-list-bar>
                   </div>
                 </div>
                 <div class="row mx-2 my-4">
@@ -229,7 +228,7 @@
 
         </div>
 
-        
+
       </mat-card>
     </div>
   </div>
