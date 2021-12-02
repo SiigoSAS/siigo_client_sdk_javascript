@@ -22,6 +22,9 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 
 //SERVICE COMPONENTS
@@ -49,7 +52,9 @@ import { InvoicePdfComponent } from './feature/invoice/invoice-pdf/invoice-pdf.c
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
     
     
   
