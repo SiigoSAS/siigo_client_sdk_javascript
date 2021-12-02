@@ -1,0 +1,19 @@
+<input
+  #search
+  type="text"
+  name="search"
+  id="search"
+  class="form-control"
+  (focus)="loadSuggestions()"
+/>
+
+<ul class="list-group" *ngIf="showSuggestions">
+  <li
+    class="list-group-item pointer"
+    *ngFor="let item of suggestions"
+    (click)="selectSuggestion(item)"
+  >
+    {{ item }}
+  </li>
+</ul>
+

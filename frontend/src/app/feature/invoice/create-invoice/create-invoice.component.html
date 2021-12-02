@@ -96,7 +96,11 @@
                   </div>
                   <div class="col-md-6 overflow-auto">
                     <p class="my-4" style="color: black">Customer*</p>
-                    <input class="form-control" type="text" placeholder="Input" />
+                    <app-search-list-bar
+                      [suggestions]="customers"
+                      (onSelect)="selectCustomer($event)"
+                      (onLoad)="getSuggestionCustomer()"
+                    ></app-search-list-bar>
                   </div>
                 </div>
                 <div class="row mx-2 my-4">
