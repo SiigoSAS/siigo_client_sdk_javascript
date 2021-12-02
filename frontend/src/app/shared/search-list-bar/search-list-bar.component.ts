@@ -8,6 +8,11 @@ import {
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
+interface ObjectValue{
+  id: string,
+  value: string
+}
+
 @Component({
   selector: 'app-search-list-bar',
   templateUrl: './search-list-bar.component.html',
@@ -16,7 +21,7 @@ import { Subject } from 'rxjs';
 export class SearchListBarComponent implements OnInit {
   @Output('onSelect') onSelect: EventEmitter<string> = new EventEmitter();
   @Output('onLoad') onLoad: EventEmitter<void> = new EventEmitter();
-  @Input() suggestions: [] = [];
+  @Input() suggestions: ObjectValue[] = [];
   @ViewChild('search') inputSearch;
 
   debouncer: Subject<string> = new Subject();
@@ -27,11 +32,11 @@ export class SearchListBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectSuggestion(term: string) {
+  selectSuggestion(term: ObjectValue) {
     this.suggestions = [];
     this.showSuggestions = false;
-    this.inputSearch.nativeElement.value = term;
-    this.onSelect.emit(term);
+    this.inputSearch.nativeElement.value = term.value;
+    this.onSelect.emit(term.id);
   }
 
   loadSuggestions(){
