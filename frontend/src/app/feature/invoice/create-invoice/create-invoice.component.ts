@@ -10,18 +10,18 @@ import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 
-export interface PeriodicElement {
+export interface invoice {
   product: string;
   description: string;
-  amount: number;
+  amount: string;
   price: string;
   discount:string;
   taxes:string;
   total:string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {product: '1', description: 'Hydrogen', amount: 1.0079, price: 'H',discount:'2',taxes:'er',total:'0.00'},
+const ELEMENT_DATA: invoice[] = [
+  {product: '', description: '', amount:'', price: '',discount:'',taxes:'',total:''},
 
 ];
 
@@ -103,6 +103,8 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     this.customersSub.unsubscribe();
     this.sellerSub.unsubscribe();
   }
+
+  onAdd(){}
 
   getSuggestionProducts(){
     this.productSub = this._productsService.getProducts()
