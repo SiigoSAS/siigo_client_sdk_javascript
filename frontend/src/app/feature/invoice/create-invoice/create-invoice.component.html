@@ -22,7 +22,7 @@
                   <mat-card class="mx-2 my-4" style="background-color: white; box-shadow: 2px 2px 5px #999">
                     <mat-card-title style="color: black">Payment Method</mat-card-title>
                     <div class="row">
-                        <div class="col-md-6 overflow-auto">                    
+                        <div class="col-md-6 overflow-auto">
                             <div class="col-md-12 overflow-auto">
                               <div class="mx-2 my-4" style="background-color: white; width: 30vh">
                                 <div class="col-md-6 overflow-auto" style="color: black">
@@ -52,13 +52,13 @@
                               </div>
                             </div></div>
                         <div class="col-md-6 overflow-auto" >
-                            <div class="col-md-8 overflow-auto">
+                              <div class="col-md-8 overflow-auto">
                                 <p class="my-4" style="color: black">Payment Method</p>
                                 <select class="form-select " aria-label="Default select example">
-                                  <option selected>Select*</option>
-                                  <option value="1">One</option>
-                                  <option value="2">Two</option>
-                                  <option value="3">Three</option>
+                                  <option selected value="0">Select*</option>
+                                  <option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
+                                    {{ paymentType.name }}
+                                  </option>
                                 </select>
                               </div>
                               <div class="col-md-9 overflow-auto" style="color: black">
@@ -88,10 +88,10 @@
                   <div class="col-md-6 overflow-auto">
                     <p class="mx-2 my-4" style="color: black">Document Type</p>
                     <select class="mx-2 form-select" aria-label="Default select example">
-                      <option selected>Select*</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                      <option selected value="0">Select*</option>
+                      <option *ngFor="let docType of documentTypes" [value]="docType.id">
+                        {{ docType.type }} - {{ docType.code }} - {{ docType.description }}
+                      </option>
                     </select>
                   </div>
                   <div class="col-md-6 overflow-auto">
@@ -113,7 +113,7 @@
             </div>
           </div>
         </mat-card>
-        
+
         <div class="example-button-container">
             <button mat-fab style="color:black; background-color:#7F92B2" aria-label="Example icon button with a delete icon">
               <mat-icon>save</mat-icon>
