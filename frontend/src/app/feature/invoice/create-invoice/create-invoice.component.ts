@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DocumentType } from '@core/models/document-type.interface';
-import { PaymentType } from '@core/models/payment-type.interface';
 import { DocumentTypesService } from 'src/app/services/document-types.service';
 import { PaymentTypesService } from 'src/app/services/payment-types.service';
 import { Subscription } from 'rxjs';
+import { PaymentType } from '@core/models/payment-type.interface';
+import { DocumentType } from '@core/models/document-type.interface';
 
 @Component({
   selector: 'app-create-invoice',
@@ -15,6 +15,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   documentTypes: DocumentType[] = [];
   customers: [];
   sellers: [];
+
 
   paymentTypesSub: Subscription;
   documentTypesSub: Subscription;
