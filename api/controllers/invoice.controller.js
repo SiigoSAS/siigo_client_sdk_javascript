@@ -49,7 +49,7 @@ exports.getInvoice = async (req, res) => {
         updatedStart: req.body.updatedStart,
         updatedEnd: req.body.updatedEnd,
         page: req.body.page || 1,
-        pageSize: req.body.pageSize || 50
+        pageSize: req.body.pageSize || 25
       }
 
       const data = await apiInstance.getInvoices(opts)
