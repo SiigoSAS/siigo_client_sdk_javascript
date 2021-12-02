@@ -10,13 +10,14 @@
         <mat-card class="mx-2 my-4" style="background-color: white; box-shadow: 2px 2px 5px #999">
           <mat-card-title style="color: black">Items Information </mat-card-title>
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-2" style="background-color: #16243d;">
+
             <ng-container matColumnDef="product">
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Product</th>
               <td mat-cell *matCellDef="let element" style="padding-right: 20px;">
                   <app-search-list-bar
-                  [suggestions]="products"
-                  (onSelect)="selectCustomer($event)"
-                  (onLoad)="getSuggestionProducts()"
+                    [suggestions]="products"
+                    (onSelect)="selectCustomer($event)"
+                    (onLoad)="getSuggestionProducts()"
                 ></app-search-list-bar>
               </td>
             </ng-container>
@@ -24,7 +25,7 @@
             <ng-container matColumnDef="description">
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Description</th>
               <td mat-cell *matCellDef="let element">
-                <div class="col-md-9 overflow-auto">
+                <div class="col-md-9 mx-3 overflow-auto">
                   <textarea class="form-control" rows="1"></textarea>
                 </div>
               </td>
@@ -35,7 +36,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Amount</th>
               <td mat-cell *matCellDef="let element" style="width: 10px;">
                 <div class="w-75">
-                  <input class="form-control text-center " type="text" placeholder="0" />
+                  <input class="form-control text-center " type="number" placeholder="0" />
                 </div>
               </td>
             </ng-container>
@@ -45,7 +46,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Price/Unit</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="text" placeholder="0" />
+                  <input class="form-control text-center" type="number" placeholder="0" />
                 </div>
               </td>
             </ng-container>
@@ -54,7 +55,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">% discount</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="text" placeholder="0" />
+                  <input class="form-control text-center" type="number" placeholder="-"disabled />
                 </div>
               </td>
             </ng-container>
@@ -63,7 +64,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Taxes</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="text" placeholder="0" />
+                  <input class="form-control text-center" type="text" placeholder="-" disabled />
                 </div>
               </td>
             </ng-container>
@@ -72,7 +73,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Total</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="text" placeholder="0" />
+                  <input class="form-control text-center" type="text" placeholder="0" disabled />
                 </div>
               </td>
             </ng-container>
@@ -111,7 +112,7 @@
                             <div class="col-md-6 overflow-auto" style="color: black">
                               <label for="colFormLabel" class="col-form-label mx-2">Discounts</label>
                               <div class="col-sm-10 mx-2">
-                                <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
+                                <input class="form-control" id="colFormLabel" placeholder="-" disabled />
                               </div>
                             </div>
                             <div class="col-md-6 overflow-auto" style="color: black">
@@ -146,15 +147,16 @@
                           </select>
                         </div>
                         <div class="col-md-9 my-3 overflow-auto" style="color: black">
-                            <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
-                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-
-                        </div>
-                        <div class="form-group">
-                            <label for="colFormLabel" class="col-form-label" style="color: black">Total forms of payment</label>
+                          <label for="colFormLabel" class="col-form-label" style="color: black">Total of payment</label>
                             <div class="col-sm-9">
                               <input class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #d1e4ff" disabled />
                             </div>
+
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
                         </div>
                       </div>
                     </div>
