@@ -6,6 +6,7 @@ import { PaymentType } from '@core/models/payment-type.interface';
 import { DocumentType } from '@core/models/document-type.interface';
 import { filter, map, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
+import { UsersService } from 'src/app/services/users.service';
 
 
 export interface PeriodicElement {
@@ -40,10 +41,13 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
 
   paymentTypesSub: Subscription;
   documentTypesSub: Subscription;
+  customersSub: Subscription;
+  sellerSub: Subscription;
 
   constructor(private _paymentTypeService: PaymentTypesService,
               private _documentTypeService: DocumentTypesService,
-              private _customerService: CustomerService) { }
+              private _customerService: CustomerService,
+              private _userService: UsersService) { }
 
   ngOnInit(): void {
     this.paymentTypesSub = this._paymentTypeService.getPaymentTypes().subscribe(payments => {
@@ -59,22 +63,40 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     console.log(customerSelected);
   }
 
+  selectSeller(sellerSelected){
+    console.log(sellerSelected);
+  }
+
   getSuggestionCustomer() {
-    this._customerService
+    this.customersSub = this._customerService
       .getCustomers()
       .pipe(
         map((data) => data.results.filter((el) => (el.name))),
-        map((data) => data.map(el => el.name)),
-        map((data) => data.map(el => el[0]),
-      ))
+        map((data) => data.map(el => ({ id: el.id, value: el.name[0] }))),
+      )
       .subscribe((data) => {
         this.customers = data.slice(0, 3);
+      });
+  }
+
+  getSuggestionSeller() {
+    this.sellerSub = this._userService
+      .getSellers()
+      .pipe(
+        map((data) => data.results),
+        map((data) => data.map(el => ({ id: el.id, value: `${el.username} - ${el.first_name}`}))),
+        tap(console.log)
+      )
+      .subscribe((data) => {
+        this.sellers = data.slice(0, 3);
       });
   }
 
   ngOnDestroy(): void{
     this.paymentTypesSub.unsubscribe();
     this.documentTypesSub.unsubscribe();
+    this.customersSub.unsubscribe();
+    this.sellerSub.unsubscribe();
   }
 
 }

@@ -200,12 +200,11 @@
                   </div>
                   <div class="col-md-6 overflow-auto">
                     <p style="color: black">Seller*</p>
-                    <select class="form-select" >
-                        <option selected>Select*</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
-                      </select>
+                    <app-search-list-bar
+                      [suggestions]="sellers"
+                      (onSelect)="selectSeller($event)"
+                      (onLoad)="getSuggestionSeller()"
+                    ></app-search-list-bar>
                   </div>
                 </div>
               </mat-card>
