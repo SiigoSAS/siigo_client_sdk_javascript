@@ -8,6 +8,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { InvoiceViewModel } from '../models/invoice-view-model';
 
 
 export interface PeriodicElement {
@@ -33,6 +34,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 
 export class CreateInvoiceComponent implements OnInit, OnDestroy {
+  values: InvoiceViewModel = {price: 0, total: 0, amount: 0};
   paymentTypes: PaymentType[] = [];
   documentTypes: DocumentType[] = [];
   customers: [];
@@ -46,6 +48,8 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   customersSub: Subscription;
   sellerSub: Subscription;
   productSub: Subscription;
+
+  selectedProduct: any;
 
   constructor(private _paymentTypeService: PaymentTypesService,
               private _documentTypeService: DocumentTypesService,
@@ -70,6 +74,10 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
 
   selectSeller(sellerSelected){
     console.log(sellerSelected);
+  }
+  
+  selectProduct(selectedProduct){
+    this.selectedProduct = selectedProduct;
   }
 
   getSuggestionCustomer() {
@@ -114,5 +122,9 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     .subscribe((data) => {
       this.products = data.slice(0, 3);
     });
+  }
+  
+  calculate(){
+    this.values.total = this.values.amount * this.values.price;
   }
 }
