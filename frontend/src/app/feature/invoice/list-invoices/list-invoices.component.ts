@@ -17,7 +17,7 @@ export class ListInvoicesComponent implements OnInit {
   listInvoice: InvoiceViewModel[] = [];
   displayedColumns: string[] = ["paymentType", "documentName", "date", "customerIdentification", "customerName", "totalPrice"];
   dataSource = new MatTableDataSource<InvoiceViewModel>();
-  opts: any = { page: 1, pageSize: 10 };
+  opts: any = { page: 1, pageSize: 100 };
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -47,6 +47,7 @@ export class ListInvoicesComponent implements OnInit {
               map((r) => {
                 const name = r.name[0];
                 return {
+                  id: item.id,
                   paymentType: item.payments[0].name,
                   documentName: item.name,
                   date: item.name,
@@ -68,5 +69,8 @@ export class ListInvoicesComponent implements OnInit {
       .subscribe((res) => {
         this.dataSource.data = res;
       });
+  }
+  openPDF(id: string) {
+    this._router.navigate([`invoice/${id}`])
   }
 }

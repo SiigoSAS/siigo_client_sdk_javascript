@@ -1,4 +1,5 @@
 export interface InvoiceViewModel{
+  id: string;
   paymentType: string;
   documentName: string
   date: string;
