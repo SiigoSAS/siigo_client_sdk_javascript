@@ -6,6 +6,7 @@ import { CustomerService } from "../../../services/customer.service";
 import { MatPaginator } from "@angular/material/paginator";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { forkJoin, of } from "rxjs";
+import { InvoiceViewModel } from "../models/invoice_view_model.interface";
 
 @Component({
   selector: "app-list-invoices",
@@ -13,15 +14,14 @@ import { forkJoin, of } from "rxjs";
   styleUrls: ["./list-invoices.component.scss"]
 })
 export class ListInvoicesComponent implements OnInit {
-  listInvoice: any;
-  displayedColumns: string[] = ["paymentTypes", "name", "date", "identification", "customername", "total"];
-  dataSource = new MatTableDataSource();
+  listInvoice: InvoiceViewModel[] = [];
+  displayedColumns: string[] = ["paymentType", "documentName", "date", "customerIdentification", "customerName", "totalPrice"];
+  dataSource = new MatTableDataSource<InvoiceViewModel>();
   opts: any = { page: 1, pageSize: 10 };
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource);
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -30,7 +30,6 @@ export class ListInvoicesComponent implements OnInit {
   }
 
   constructor(private _invoiceService: InvoiceService, private _customerService: CustomerService, private _router: Router) {
-    this.listInvoice = {};
   }
 
   ngOnInit(): void {
@@ -47,7 +46,14 @@ export class ListInvoicesComponent implements OnInit {
             return this._customerService.getCustomer(item.customer.id).pipe(
               map((r) => {
                 const name = r.name[0];
-                return { ...item, customer: { ...item.customer, name } };
+                return {
+                  paymentType: item.payments[0].name,
+                  documentName: item.name,
+                  date: item.name,
+                  customerIdentification: item.customer.identification,
+                  customerName: name,
+                  totalPrice: item.total
+                 };
               })
             );
           });

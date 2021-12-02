@@ -20,6 +20,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+
 
 //SERVICE COMPONENTS
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -44,6 +47,9 @@ import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.c
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
+    MatSelectModule,
+    MatDatepickerModule
+    
     
   
   ],
