@@ -37,6 +37,7 @@
     "express": "^4.15.2",
     "font-awesome": "^4.7.0",
     "materialize-css": "^1.0.0-rc.2",
+    "ng-http-loader": "^11.0.1",
     "ngx-bootstrap": "^7.1.0",
     "ngx-toastr": "^14.0.0",
     "rxjs": "^6.6.7",
