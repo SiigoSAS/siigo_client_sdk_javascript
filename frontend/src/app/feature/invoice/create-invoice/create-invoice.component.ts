@@ -8,6 +8,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 export interface PeriodicElement {
@@ -40,6 +41,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   products: [];
   displayedColumns: string[] = ['product', 'description', 'amount', 'price', 'discount', 'taxes','total'];
   dataSource = ELEMENT_DATA;
+  form: FormGroup;
 
   paymentTypesSub: Subscription;
   documentTypesSub: Subscription;
@@ -51,8 +53,10 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
               private _documentTypeService: DocumentTypesService,
               private _customerService: CustomerService,
               private _userService: UsersService,
-              private _productsService: ProductsService
-              ) { }
+              private _productsService: ProductsService,
+              private _fb: FormBuilder
+              ) {
+  }
 
   ngOnInit(): void {
     this.paymentTypesSub = this._paymentTypeService.getPaymentTypes().subscribe(payments => {
@@ -77,7 +81,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       .getCustomers()
       .pipe(
         map((data) => data.results.filter((el) => (el.name))),
-        map((data) => data.map(el => ({ id: el.id, value: el.name[0] }))),
+        map((data) => data.map(el => ({ id: el.id, value: `${el.identification} - ${el.name[0]}` }))),
       )
       .subscribe((data) => {
         this.customers = data.slice(0, 3);
@@ -102,6 +106,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     this.documentTypesSub.unsubscribe();
     this.customersSub.unsubscribe();
     this.sellerSub.unsubscribe();
+    this.productSub.unsubscribe();
   }
 
   getSuggestionProducts(){
