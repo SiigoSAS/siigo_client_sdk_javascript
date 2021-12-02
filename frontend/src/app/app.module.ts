@@ -24,10 +24,12 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 
 
+
 //SERVICE COMPONENTS
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.component';
+import { MatNativeDateModule } from "@angular/material/core";
 
 
 
@@ -48,7 +50,8 @@ import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.c
     MatPaginatorModule,
     MatTableModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatNativeDateModule
     
     
   
