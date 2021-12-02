@@ -33,7 +33,7 @@ import { MatNativeDateModule } from "@angular/material/core";
 import { InvoicePdfComponent } from './feature/invoice/invoice-pdf/invoice-pdf.component';
 
 
-
+import { NgHttpLoaderModule } from 'ng-http-loader';
 
 @NgModule({
   declarations: [AppComponent, CreateInvoiceComponent, AuthComponent, CreateCustomerComponent, CreateProductComponent, ListInvoicesComponent, LeftSidebarComponent, InvoicePdfComponent],
@@ -52,8 +52,7 @@ import { InvoicePdfComponent } from './feature/invoice/invoice-pdf/invoice-pdf.c
     MatTableModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
-    
+    NgHttpLoaderModule.forRoot(),
     
   
   ],
