@@ -30,12 +30,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.component';
 import { MatNativeDateModule } from "@angular/material/core";
+import { InvoicePdfComponent } from './feature/invoice/invoice-pdf/invoice-pdf.component';
 
 
 
 
 @NgModule({
-  declarations: [AppComponent, CreateInvoiceComponent, AuthComponent, CreateCustomerComponent, CreateProductComponent, ListInvoicesComponent, LeftSidebarComponent],
+  declarations: [AppComponent, CreateInvoiceComponent, AuthComponent, CreateCustomerComponent, CreateProductComponent, ListInvoicesComponent, LeftSidebarComponent, InvoicePdfComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: "serverApp" }),
     AppRoutingModule,

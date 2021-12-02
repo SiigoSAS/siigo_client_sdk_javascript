@@ -138,15 +138,15 @@
                       <div class="col-md-6 overflow-auto">
                         <div class="col-md-8 overflow-auto">
                           <p class="my-4" style="color: black">Payment Method</p>
-                          <select class="form-select" aria-label="Default select example">
-                            <option selected>Select*</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                          <select class="form-select " aria-label="Default select example">
+                            <option selected value="0">Select*</option>
+                            <option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
+                              {{ paymentType.name }}
+                            </option>
                           </select>
                         </div>
                         <div class="col-md-9 my-3 overflow-auto" style="color: black">
-                            <label for="exampleFormControlTextarea1" style="color: black">Observaciones</label>
+                            <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
                           <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                       
                         </div>
@@ -170,11 +170,11 @@
                 <div class="row mx-2 my-4">
                   <div class="col-md-6 overflow-auto">
                     <p class="my-4" style="color: black">Document Type</p>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Select*</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <select class="mx-2 form-select" aria-label="Default select example">
+                      <option selected value="0">Select*</option>
+                      <option *ngFor="let docType of documentTypes" [value]="docType.id">
+                        {{ docType.type }} - {{ docType.code }} - {{ docType.description }}
+                      </option>
                     </select>
                   </div>
                   <div class="col-md-6 overflow-auto">
