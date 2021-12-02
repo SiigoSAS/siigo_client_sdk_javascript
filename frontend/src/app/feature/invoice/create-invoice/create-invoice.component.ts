@@ -8,18 +8,18 @@ import { filter, map, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
 
 
-export interface PeriodicElement {
+export interface invoice {
   product: string;
   description: string;
-  amount: number;
+  amount: string;
   price: string;
   discount:string;
   taxes:string;
   total:string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {product: '1', description: 'Hydrogen', amount: 1.0079, price: 'H',discount:'2',taxes:'er',total:'0.00'},
+const ELEMENT_DATA: invoice[] = [
+  {product: '', description: '', amount:'', price: '',discount:'',taxes:'',total:''},
 
 ];
 
@@ -35,6 +35,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   documentTypes: DocumentType[] = [];
   customers: [];
   sellers: [];
+  
   displayedColumns: string[] = ['product', 'description', 'amount', 'price', 'discount', 'taxes','total'];
   dataSource = ELEMENT_DATA;
 
@@ -76,5 +77,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     this.paymentTypesSub.unsubscribe();
     this.documentTypesSub.unsubscribe();
   }
+
+  onAdd(){}
 
 }
