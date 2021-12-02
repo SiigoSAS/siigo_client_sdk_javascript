@@ -9,10 +9,87 @@
         <!-- ITEMS INFORMATION -->
         <mat-card class="mx-2 my-4" style="background-color: white; box-shadow: 2px 2px 5px #999">
           <mat-card-title style="color: black">Items Information </mat-card-title>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-2" style="background-color: #16243d;">
+            <ng-container matColumnDef="product">
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Product</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-form-field class="mx-2" style="width: 25vh">
+                  <span matPrefix> </span>
+                  <input type="tel" matInput placeholder="Search" name="search" [(ngModel)]="search" />
+                  <button matSuffix mat-button><mat-icon>search</mat-icon></button>
+                </mat-form-field>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Description</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="col-md-9 overflow-auto">
+                  <textarea class="form-control" rows="1"></textarea>
+                </div>
+              </td>
+            </ng-container>
+
+            
+            <ng-container matColumnDef="amount" >
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Amount</th>
+              <td mat-cell *matCellDef="let element" style="width: 10px;">
+                <div class="w-75">
+                  <input class="form-control text-center " type="text" placeholder="0" />
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="price">
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Price/Unit</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="w-75">
+                  <input class="form-control text-center" type="text" placeholder="0" />
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="discount">
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">% discount</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="w-75">
+                  <input class="form-control text-center" type="text" placeholder="0" />
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="taxes">
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Taxes</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="w-75">
+                  <input class="form-control text-center" type="text" placeholder="0" />
+                </div>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="total">
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Total</th>
+              <td mat-cell *matCellDef="let element">
+                <div class="w-75">
+                  <input class="form-control text-center" type="text" placeholder="0" />
+                </div>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+          <div class="d-flex">
+            <button class="mx-auto" mat-fab style="color: black; background-color: #7f92b2;" >
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+         
         </mat-card>
         <!-- CLOSE ITEMS INFORMATION -->
 
-        <mat-card class="mx-2 my-4" style="background-color: white; box-shadow: 2px 2px 5px #999; ">
+        <mat-card class="mx-2 my-4" style="background-color: white; box-shadow: 2px 2px 5px #999">
           <div class="row">
             <div class="col-md-6 overflow-auto">
               <!-- PAYMENT INFORMATION -->
@@ -22,59 +99,65 @@
                   <mat-card class="mx-2 my-4" style="background-color: white; box-shadow: 2px 2px 5px #999">
                     <mat-card-title style="color: black">Payment Method</mat-card-title>
                     <div class="row">
-                        <div class="col-md-6 overflow-auto">
-                            <div class="col-md-12 overflow-auto">
-                              <div class="mx-2 my-4" style="background-color: white; width: 30vh">
-                                <div class="col-md-6 overflow-auto" style="color: black">
-                                  <label for="colFormLabel" class="col-form-label mx-2">Total Bruto</label>
-                                  <div class="col-sm-10 mx-2">
-                                    <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
-                                  </div>
-                                </div>
-                                <div class="col-md-6 overflow-auto" style="color: black">
-                                  <label for="colFormLabel" class="col-form-label mx-2">Discounts</label>
-                                  <div class="col-sm-10 mx-2">
-                                    <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
-                                  </div>
-                                </div>
-                                <div class="col-md-6 overflow-auto" style="color: black">
-                                  <label for="colFormLabel" class="col-form-label mx-2">Subtotal</label>
-                                  <div class="col-sm-10 mx-2">
-                                    <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
-                                  </div>
-                                </div>
-                                <div class="col-md-6 overflow-auto" style="color: black">
-                                  <label for="colFormLabel" class="col-form-label mx-2">Total Neto</label>
-                                  <div class="col-sm-10 mx-2">
-                                    <input class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #D1E4FF ;" disabled />
-                                  </div>
-                                </div>
+                      <div class="col-md-6 overflow-auto">
+                        <div class="col-md-12 overflow-auto">
+                          <div class="mx-2 my-4" style="background-color: white; width: 30vh">
+                            <div class="col-md-6 overflow-auto" style="color: black">
+                              <label for="colFormLabel" class="col-form-label mx-2">Total Bruto</label>
+                              <div class="col-sm-10 mx-2">
+                                <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
                               </div>
-                            </div></div>
-                        <div class="col-md-6 overflow-auto" >
-                              <div class="col-md-8 overflow-auto">
-                                <p class="my-4" style="color: black">Payment Method</p>
-                                <select class="form-select " aria-label="Default select example">
-                                  <option selected value="0">Select*</option>
-                                  <option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
-                                    {{ paymentType.name }}
-                                  </option>
-                                </select>
+                            </div>
+                            <div class="col-md-6 overflow-auto" style="color: black">
+                              <label for="colFormLabel" class="col-form-label mx-2">Discounts</label>
+                              <div class="col-sm-10 mx-2">
+                                <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
                               </div>
-                              <div class="col-md-9 overflow-auto" style="color: black">
-                                <label for="colFormLabel" class="col-form-label" >Total forms of payment</label>
-                                <div class="col-sm-11 ">
-                                  <input class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #D1E4FF ;" disabled />
-                                </div>
+                            </div>
+                            <div class="col-md-6 overflow-auto" style="color: black">
+                              <label for="colFormLabel" class="col-form-label mx-2">Subtotal</label>
+                              <div class="col-sm-10 mx-2">
+                                <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
                               </div>
-                              <div class="form-group my-4">
-                                <label for="exampleFormControlTextarea1" style="color: black;">Observaciones</label>
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                            <div class="col-md-6 overflow-auto" style="color: black">
+                              <label for="colFormLabel" class="col-form-label mx-2">Total Neto</label>
+                              <div class="col-sm-10 mx-2">
+                                <input
+                                  class="form-control"
+                                  id="colFormLabel"
+                                  placeholder="0.00"
+                                  style="background-color: #d1e4ff"
+                                  disabled
+                                />
                               </div>
+                            </div>
+                          </div>
                         </div>
-
+                      </div>
+                      <div class="col-md-6 overflow-auto">
+                        <div class="col-md-8 overflow-auto">
+                          <p class="my-4" style="color: black">Payment Method</p>
+                          <select class="form-select " aria-label="Default select example">
+                            <option selected value="0">Select*</option>
+                            <option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
+                              {{ paymentType.name }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-md-9 my-3 overflow-auto" style="color: black">
+                            <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                      
+                        </div>
+                        <div class="form-group">
+                            <label for="colFormLabel" class="col-form-label" style="color: black">Total forms of payment</label>
+                            <div class="col-sm-9">
+                              <input class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #d1e4ff" disabled />
+                            </div>
+                        </div>
+                      </div>
                     </div>
-
                   </mat-card>
                 </div>
                 <!-- CLOSE PAYMENT INFORMATION -->
@@ -82,11 +165,11 @@
             </div>
             <div class="col-md-6 overflow-auto">
               <!-- INVOICE INFORMATION -->
-              <mat-card class="mx-2 my-5" style="background-color: white; box-shadow: 2px 2px 5px #999; ">
+              <mat-card class="mx-2 my-5" style="background-color: white; box-shadow: 2px 2px 5px #999">
                 <mat-card-title style="color: black">Invoice Information </mat-card-title>
                 <div class="row mx-2 my-4">
                   <div class="col-md-6 overflow-auto">
-                    <p class="mx-2 my-4" style="color: black">Document Type</p>
+                    <p class="my-4" style="color: black">Document Type</p>
                     <select class="mx-2 form-select" aria-label="Default select example">
                       <option selected value="0">Select*</option>
                       <option *ngFor="let docType of documentTypes" [value]="docType.id">
@@ -96,16 +179,34 @@
                   </div>
                   <div class="col-md-6 overflow-auto">
                     <p class="my-4" style="color: black">Customer*</p>
-                    <input class="form-control" type="text" placeholder="Input" />
+                    <select class="mx-2 form-select" aria-label="Default select example">
+                        <option selected>Select*</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
                   </div>
                 </div>
                 <div class="row mx-2 my-4">
-                  <div class="col-md-6 overflow-auto" style="color: black">
-                    <p class="mx-2" style="color: black">Date*</p>
+                  <div class="col-md-6  container-fluid" style="color: black;">
+                    <p class="" style="color: black">Date*</p>
+                    <mat-form-field appearance="fill" style="width: 35vh;border: #CCD4DA 1px solid;border-radius:5px; height: 7vh;">
+                        <mat-label style="color: black;">Choose a date</mat-label>
+                        <input  matInput [matDatepicker]="picker" >
+                        <mat-datepicker-toggle matSuffix [for]="picker">
+                          <mat-icon style="color:black" matDatepickerToggleIcon>calendar_month</mat-icon>
+                        </mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
                   </div>
-                  <div class="col-md-6 overflow-auto" style="color: black">
+                  <div class="col-md-6 overflow-auto">
                     <p style="color: black">Seller*</p>
-                    <input class="form-control" type="text" placeholder="Input" />
+                    <select class="form-select" >
+                        <option selected>Select*</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                      </select>
                   </div>
                 </div>
               </mat-card>
@@ -114,16 +215,21 @@
           </div>
         </mat-card>
 
-        <div class="example-button-container">
-            <button mat-fab style="color:black; background-color:#7F92B2" aria-label="Example icon button with a delete icon">
-              <mat-icon>save</mat-icon>
-            </button>
-          </div>
-          <div class="example-button-container my-4">
-            <button mat-fab style="color:black; background-color:#7F92B2" aria-label="Example icon button with a delete icon">
-              <mat-icon>close</mat-icon>
-            </button>
-          </div>
+        <div class="row">
+            <div class="col-md-1 example-button-container">
+                <button mat-fab style="color: black; background-color: #7f92b2" aria-label="Example icon button with a delete icon">
+                  <mat-icon>save</mat-icon>
+                </button>
+              </div>
+              <div class=" col-md-1 example-button-container">
+                <button mat-fab style="color: black; background-color: #7f92b2" >
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+
+        </div>
+
+        
       </mat-card>
     </div>
   </div>
