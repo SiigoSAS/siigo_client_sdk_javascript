@@ -6,6 +6,8 @@ import { CreateInvoiceComponent } from './feature/invoice/create-invoice/create-
 import { CreateProductComponent } from './feature/product/create-product/create-product.component';
 import { AuthComponent } from './feature/auth/auth.component';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
+import { InvoicePdfComponent } from "./feature/invoice/invoice-pdf/invoice-pdf.component";
+
 
 
 const routes: Routes = [
@@ -48,7 +50,12 @@ const routes: Routes = [
       ListInvoicesComponent,
     pathMatch: 'full'
   },  
-
+  {
+    path: 'invoice/:invoiceId',
+    component:
+    InvoicePdfComponent,
+    pathMatch: 'full'
+  },  
 ];
 
 @NgModule({
