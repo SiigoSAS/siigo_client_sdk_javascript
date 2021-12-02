@@ -1,4 +1,4 @@
-export interface InvoiceViewModel{
+export interface ListInvoiceViewModel{
   id: string;
   paymentType: string;
   documentName: string
