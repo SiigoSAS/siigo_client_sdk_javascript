@@ -15,9 +15,9 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Product</th>
               <td mat-cell *matCellDef="let element" style="padding-right: 20px;">
                   <app-search-list-bar
-                    [suggestions]="products"
-                    (onSelect)="selectCustomer($event)"
-                    (onLoad)="getSuggestionProducts()"
+                  [suggestions]="products"
+                  (onSelect)="selectProduct($event)"
+                  (onLoad)="getSuggestionProducts()"
                 ></app-search-list-bar>
               </td>
             </ng-container>
@@ -36,7 +36,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Amount</th>
               <td mat-cell *matCellDef="let element" style="width: 10px;">
                 <div class="w-75">
-                  <input class="form-control text-center " type="number" placeholder="0" />
+                  <input (keyup)="calculate()" [(ngModel)]="values.amount" class="form-control text-center " type="number" placeholder="0" />
                 </div>
               </td>
             </ng-container>
@@ -46,7 +46,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Price/Unit</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="number" placeholder="0" />
+                  <input (keyup)="calculate()" [(ngModel)]="values.price" class="form-control text-center" type="number" placeholder="0" />
                 </div>
               </td>
             </ng-container>
@@ -55,7 +55,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">% discount</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="number" placeholder="-"disabled />
+                  <input class="form-control text-center" type="number" placeholder="0" disabled/>
                 </div>
               </td>
             </ng-container>
@@ -64,7 +64,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Taxes</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="text" placeholder="-" disabled />
+                  <input class="form-control text-center" type="number" placeholder="0" disabled/>
                 </div>
               </td>
             </ng-container>
@@ -73,7 +73,7 @@
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Total</th>
               <td mat-cell *matCellDef="let element">
                 <div class="w-75">
-                  <input class="form-control text-center" type="text" placeholder="0" disabled />
+                  <input [(ngModel)]="values.total" class="form-control text-center" type="number" placeholder="0" disabled/>
                 </div>
               </td>
             </ng-container>
@@ -106,7 +106,7 @@
                             <div class="col-md-6 overflow-auto" style="color: black">
                               <label for="colFormLabel" class="col-form-label mx-2">Total Bruto</label>
                               <div class="col-sm-10 mx-2">
-                                <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
+                                <input [(ngModel)]="values.totalB" class="form-control" id="colFormLabel" placeholder="0.00" disabled />
                               </div>
                             </div>
                             <div class="col-md-6 overflow-auto" style="color: black">
@@ -118,13 +118,14 @@
                             <div class="col-md-6 overflow-auto" style="color: black">
                               <label for="colFormLabel" class="col-form-label mx-2">Subtotal</label>
                               <div class="col-sm-10 mx-2">
-                                <input class="form-control" id="colFormLabel" placeholder="0.00" disabled />
+                                <input [(ngModel)]="values.subTotal" class="form-control" id="colFormLabel" placeholder="0.00" disabled />
                               </div>
                             </div>
                             <div class="col-md-6 overflow-auto" style="color: black">
                               <label for="colFormLabel" class="col-form-label mx-2">Total Neto</label>
                               <div class="col-sm-10 mx-2">
                                 <input
+                                  [(ngModel)]="values.totalNeto"
                                   class="form-control"
                                   id="colFormLabel"
                                   placeholder="0.00"
@@ -147,9 +148,9 @@
                           </select>
                         </div>
                         <div class="col-md-9 my-3 overflow-auto" style="color: black">
-                          <label for="colFormLabel" class="col-form-label" style="color: black">Total of payment</label>
+                          <label for="colFormLabel" class="col-form-label" style="color: black">Total to pay</label>
                             <div class="col-sm-9">
-                              <input class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #d1e4ff" disabled />
+                              <input [(ngModel)]="values.totalPay" class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #d1e4ff" disabled />
                             </div>
 
                         </div>

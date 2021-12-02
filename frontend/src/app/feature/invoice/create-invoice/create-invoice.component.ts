@@ -8,8 +8,7 @@ import { filter, map, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ProductsService } from 'src/app/services/products.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { InvoiceViewModel } from '../models/invoice-view-model';
 
 export interface invoice {
   product: string;
@@ -34,6 +33,16 @@ const ELEMENT_DATA: invoice[] = [
 
 
 export class CreateInvoiceComponent implements OnInit, OnDestroy {
+  values: InvoiceViewModel = {
+    price: 0,
+    total: 0,
+    amount: 0,
+    totalB: 0,
+    subTotal: 0,
+    totalNeto: 0,
+    totalPay: 0,
+    selectedProduct: '',
+  };
   paymentTypes: PaymentType[] = [];
   documentTypes: DocumentType[] = [];
   customers: [];
@@ -49,12 +58,13 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   sellerSub: Subscription;
   productSub: Subscription;
 
+  selectedProduct: any;
+
   constructor(private _paymentTypeService: PaymentTypesService,
               private _documentTypeService: DocumentTypesService,
               private _customerService: CustomerService,
               private _userService: UsersService,
-              private _productsService: ProductsService,
-              private _fb: FormBuilder
+              private _productsService: ProductsService
               ) {
   }
 
@@ -74,6 +84,10 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
 
   selectSeller(sellerSelected){
     console.log(sellerSelected);
+  }
+
+  selectProduct(selectedProduct){
+    this.values.selectedProduct = selectedProduct;
   }
 
   getSuggestionCustomer() {
@@ -121,5 +135,17 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     .subscribe((data) => {
       this.products = data.slice(0, 3);
     });
+  }
+
+  calculate(){
+    this.values.total = this.values.amount * this.values.price;
+    this.values.totalB = this.values.total;
+    this.values.subTotal = this.values.total;
+    this.values.totalNeto = this.values.total;
+    this.values.totalPay = this.values.total;
+  }
+
+  saveInvoice(){
+
   }
 }
