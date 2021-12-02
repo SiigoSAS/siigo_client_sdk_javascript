@@ -7,6 +7,7 @@ import { DocumentType } from '@core/models/document-type.interface';
 import { filter, map, tap } from 'rxjs/operators';
 import { CustomerService } from 'src/app/services/customer.service';
 import { UsersService } from 'src/app/services/users.service';
+import { ProductsService } from 'src/app/services/products.service';
 
 
 export interface PeriodicElement {
@@ -36,6 +37,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   documentTypes: DocumentType[] = [];
   customers: [];
   sellers: [];
+  products: [];
   displayedColumns: string[] = ['product', 'description', 'amount', 'price', 'discount', 'taxes','total'];
   dataSource = ELEMENT_DATA;
 
@@ -43,11 +45,14 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   documentTypesSub: Subscription;
   customersSub: Subscription;
   sellerSub: Subscription;
+  productSub: Subscription;
 
   constructor(private _paymentTypeService: PaymentTypesService,
               private _documentTypeService: DocumentTypesService,
               private _customerService: CustomerService,
-              private _userService: UsersService) { }
+              private _userService: UsersService,
+              private _productsService: ProductsService
+              ) { }
 
   ngOnInit(): void {
     this.paymentTypesSub = this._paymentTypeService.getPaymentTypes().subscribe(payments => {
@@ -99,4 +104,15 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     this.sellerSub.unsubscribe();
   }
 
+  getSuggestionProducts(){
+    this.productSub = this._productsService.getProducts()
+    .pipe(
+      map((data) => data.results),
+      map((data) => data.map(el => ({ id: el.code, value: `${el.code} - ${el.name}`}))),
+      tap(console.log)
+    )
+    .subscribe((data) => {
+      this.products = data.slice(0, 3);
+    });
+  }
 }

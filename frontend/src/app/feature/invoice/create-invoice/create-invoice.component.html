@@ -13,11 +13,16 @@
             <ng-container matColumnDef="product">
               <th mat-header-cell *matHeaderCellDef style="width: 10%;">Product</th>
               <td mat-cell *matCellDef="let element">
-                <mat-form-field class="mx-2" style="width: 25vh">
+                
                   <span matPrefix> </span>
-                  <input type="tel" matInput placeholder="Search" name="search" [(ngModel)]="search" />
-                  <button matSuffix mat-button><mat-icon>search</mat-icon></button>
-                </mat-form-field>
+                  
+                  <app-search-list-bar
+                  [suggestions]="products"
+                  (onSelect)="selectCustomer($event)"
+                  (onLoad)="getSuggestionProducts()"
+                ></app-search-list-bar>
+                  
+         
               </td>
             </ng-container>
 
