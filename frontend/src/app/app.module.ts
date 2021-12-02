@@ -52,6 +52,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatTableModule,
     MatSelectModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     NgHttpLoaderModule.forRoot(),
     
   
