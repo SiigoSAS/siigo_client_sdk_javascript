@@ -6,5 +6,11 @@ export interface InvoiceViewModel {
   subTotal: number,
   totalPay: number,
   totalNeto: number,
-  selectedProduct: any, 
+  selectedProduct: any,
+  documentType: string,
+  date: string,
+  customerIdentification: string,
+  branchOffice: number,
+  seller: string,
+  paymentId: string
 }

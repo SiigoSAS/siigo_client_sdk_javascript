@@ -12,18 +12,13 @@
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 my-2" style="background-color: #16243d;">
 
             <ng-container matColumnDef="product">
-              <th mat-header-cell *matHeaderCellDef class="mx-3" style="width: 10%;">Product</th>
-              <td mat-cell *matCellDef="let element">
-                
-                  <span matPrefix> </span>
-                  
+              <th mat-header-cell *matHeaderCellDef style="width: 10%;">Product</th>
+              <td mat-cell *matCellDef="let element" style="padding-right: 20px;">
                   <app-search-list-bar
                   [suggestions]="products"
                   (onSelect)="selectProduct($event)"
                   (onLoad)="getSuggestionProducts()"
                 ></app-search-list-bar>
-                  
-         
               </td>
             </ng-container>
 
@@ -130,7 +125,7 @@
                               <label for="colFormLabel" class="col-form-label mx-2">Total Neto</label>
                               <div class="col-sm-10 mx-2">
                                 <input
-                                  [(ngModel)]="values.totalNeto" 
+                                  [(ngModel)]="values.totalNeto"
                                   class="form-control"
                                   id="colFormLabel"
                                   placeholder="0.00"
@@ -145,7 +140,7 @@
                       <div class="col-md-6 overflow-auto">
                         <div class="col-md-8 overflow-auto">
                           <p class="my-4" style="color: black">Payment Method</p>
-                          <select class="form-select " aria-label="Default select example">
+                          <select class="form-select " aria-label="Default select example" [(ngModel)]="values.paymentId">
                             <option selected value="0">Select*</option>
                             <option *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
                               {{ paymentType.name }}
@@ -157,7 +152,7 @@
                             <div class="col-sm-9">
                               <input [(ngModel)]="values.totalPay" class="form-control" id="colFormLabel" placeholder="0.00" style="background-color: #d1e4ff" disabled />
                             </div>
-                           
+
                         </div>
                         <div class="form-group">
                           <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
@@ -178,7 +173,7 @@
                 <div class="row mx-2 my-4">
                   <div class="col-md-6 overflow-auto">
                     <p class="my-4" style="color: black">Document Type</p>
-                    <select class="mx-2 form-select" aria-label="Default select example">
+                    <select class="mx-2 form-select" aria-label="Default select example" [(ngModel)]="values.documentType">
                       <option selected value="0">Select*</option>
                       <option *ngFor="let docType of documentTypes" [value]="docType.id">
                         {{ docType.type }} - {{ docType.code }} - {{ docType.description }}
@@ -199,11 +194,11 @@
                     <p class="" style="color: black">Date*</p>
                     <mat-form-field appearance="fill" style="width: 35vh;border: #CCD4DA 1px solid;border-radius:5px; height: 7vh;">
                         <mat-label style="color: black;">Choose a date</mat-label>
-                        <input  matInput [matDatepicker]="picker" >
+                        <input  matInput [matDatepicker]="picker" [(ngModel)]="values.date" >
                         <mat-datepicker-toggle matSuffix [for]="picker">
                           <mat-icon style="color:black" matDatepickerToggleIcon>calendar_month</mat-icon>
                         </mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-datepicker #picker [(ngModel)]="values.date" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
                       </mat-form-field>
                   </div>
                   <div class="col-md-6 overflow-auto">
@@ -223,7 +218,7 @@
 
         <div class="row">
             <div class="col-md-1 example-button-container">
-                <button mat-fab style="color: black; background-color: #7f92b2" aria-label="Example icon button with a delete icon">
+                <button (click)="onSave()" mat-fab style="color: black; background-color: #7f92b2" aria-label="Example icon button with a delete icon">
                   <mat-icon>save</mat-icon>
                 </button>
               </div>
