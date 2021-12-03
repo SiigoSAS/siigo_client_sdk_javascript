@@ -44,4 +44,8 @@ export class SearchListBarComponent implements OnInit {
     this.onLoad.emit();
   }
 
+  cleanInput(){
+    this.inputSearch.nativeElement.value = "";
+  }
+
 }

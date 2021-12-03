@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { DocumentTypesService } from "src/app/services/document-types.service";
 import { PaymentTypesService } from "src/app/services/payment-types.service";
 import { Subscription } from "rxjs";
@@ -12,6 +12,7 @@ import { InvoiceViewModel } from "../models/invoice-view-model";
 import { InvoiceService } from "src/app/services/invoice.service";
 import Swal from 'sweetalert2'
 import { formatDate } from "@angular/common";
+import { SearchListBarComponent } from "@shared/search-list-bar/search-list-bar.component";
 
 export interface invoice {
   product: string;
@@ -48,6 +49,9 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   productSub: Subscription;
 
   selectedProduct: any;
+
+  @ViewChild("customersInput") customersInput: SearchListBarComponent;
+  @ViewChild("sellerInput") sellerInput: SearchListBarComponent;
 
   constructor(
     private _paymentTypeService: PaymentTypesService,
@@ -87,6 +91,9 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       seller: "",
       paymentId: ""
     };
+
+    this.customersInput?.cleanInput();
+    this.sellerInput?.cleanInput();
   }
 
   public onDate(event): void {
@@ -138,6 +145,8 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
 
   validateForm(){
+    console.log(this.values.selectedProduct, this.values.paymentId, this.values.customerIdentification, this.values.documentType);
+
     if (this.values.selectedProduct === "" ||
         this.values.paymentId === "" ||
         this.values.customerIdentification === "" ||
