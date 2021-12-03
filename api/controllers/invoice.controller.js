@@ -1,8 +1,8 @@
 // invoiceController.js
 // Import user model
-const SiigoInstance = require('./auth.controller')
+const SiigoInstance = require("./auth.controller");
 // Handle index actions
-const environment = require('../config/environment')
+const environment = require("../config/environment");
 
 exports.createInvoice = async function (req, res) {
   const opts = {
@@ -17,93 +17,93 @@ exports.createInvoice = async function (req, res) {
     seller: req.body.seller,
     items: req.body.items,
     payments: req.body.payments
-  }
+  };
 
   try {
-    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
+    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
 
-    const data = await apiInstance.createInvoice(opts)
-    res.status(201).json(data)
+    const data = await apiInstance.createInvoice(opts);
+    res.status(201).json(data);
   } catch (error) {
     res.json({
-      status: 'Error',
-      message: 'Something was wrong',
+      status: "Error",
+      message: "Something was wrong",
       error: error
-    })
+    });
   }
-}
+};
 
 exports.getInvoice = async (req, res) => {
   if (req.params.id == undefined) {
     try {
-      const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
+      const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
       const opts = {
         documentId: req.body.documentId,
         customerIdentification: req.body.customerIdentification,
         customerBranchOffice: req.body.customerBranchOffice,
         name: req.body.name,
-        createdStart: req.body.createdStart || new Date().toISOString().slice(0,10),
-        createdEnd: req.body.createdEnd || new Date().toISOString().slice(0,10),
+        createdStart: req.body.createdStart,
+        createdEnd: req.body.createdEnd,
         dateStart: req.body.dateStart,
         dateEnd: req.body.dateEnd,
         updatedStart: req.body.updatedStart,
         updatedEnd: req.body.updatedEnd,
         page: req.body.page || 1,
-        pageSize: req.body.pageSize || 25,
-      }
+        pageSize: req.body.pageSize || 25
+      };
 
-      const data = await apiInstance.getInvoices(opts)
-      res.status(200).json(data)
+      const data = await apiInstance.getInvoices(opts);
+      res.status(200).json(data);
     } catch (error) {
       res.json({
-        status: 'Error',
-        message: 'Something was wrong',
+        status: "Error",
+        message: "Something was wrong",
         error: error
-      })
+      });
     }
   } else {
     try {
-      const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
-      const id = req.params.id
+      const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
+      const id = req.params.id;
 
-      const data = await apiInstance.getInvoice(id)
-      res.status(200).json(data)
+      const data = await apiInstance.getInvoice(id);
+      res.status(200).json(data);
     } catch (error) {
       res.json({
-        status: 'Error',
-        message: 'Something was wrong',
+        status: "Error",
+        message: "Something was wrong",
         error: error
-      })
+      });
     }
   }
-}
+};
 
 exports.getInvoicePDF = async (req, res) => {
   try {
-    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
-    const id = req.params.id
-    const data = await apiInstance.getInvoicePDF(id)
-    res.status(200).json(data)
+    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
+    const id = req.params.id;
+    const data = await apiInstance.getInvoicePDF(id);
+    res.status(200).json(data);
   } catch (error) {
     res.json({
-      status: 'Error',
-      message: 'Something was wrong',
+      status: "Error",
+      message: "Something was wrong",
       error: error
-    })
+    });
   }
-}
+};
 
 exports.getElectronicInvoiceErrors = async (req, res) => {
   try {
-    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi()
-    const id = req.params.id
-    const data = await apiInstance.getElectronicInvoiceErrors(id)
-    res.status(200).json(data)
+    const apiInstance = new SiigoInstance.SiigoApi.InvoiceApi();
+    const id = req.params.id;
+    const data = await apiInstance.getElectronicInvoiceErrors(id);
+    res.status(200).json(data);
   } catch (error) {
     res.json({
-      status: 'Error',
-      message: 'Something was wrong',
+      status: "Error",
+      message: "Something was wrong",
       error: error
-    })
+    });
   }
-}
+};
