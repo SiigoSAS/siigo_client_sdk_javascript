@@ -1,3 +1,11 @@
 table {
   width: 100%;
 }
+
+.example-button-container{
+  text-align:right;
+  button {
+    margin-left: 14px;
+    margin-top: 14px;
+  }
+}
