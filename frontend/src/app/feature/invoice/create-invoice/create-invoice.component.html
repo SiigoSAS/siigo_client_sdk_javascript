@@ -24,6 +24,7 @@
                       <div class="col-md-6 overflow-auto">
                         <p class="my-4" style="color: black">Customer*</p>
                         <app-search-list-bar
+                          #customersInput
                           [suggestions]="customers"
                           (onSelect)="selectCustomer($event)"
                           (onLoad)="getSuggestionCustomer()"
@@ -45,6 +46,7 @@
                       <div class="col-md-6 overflow-auto">
                         <p style="color: black">Seller*</p>
                         <app-search-list-bar
+                          #sellerInput
                           [suggestions]="sellers"
                           (onSelect)="selectSeller($event)"
                           (onLoad)="getSuggestionSeller()"
@@ -153,7 +155,7 @@
                     <mat-card-title style="color: black">Payment Method</mat-card-title>
 
                     <div class="row">
-                
+
                         <div class="col-md-12 overflow-auto">
                           <div class="mx-2 my-4" style="background-color: white; width: 30vh">
                             <div class="col-md-12 overflow-auto" style="color: black">
@@ -174,11 +176,11 @@
                                 <input [(ngModel)]="values.subTotal" class="form-control" id="colFormLabel" placeholder="0.00" disabled />
                               </div>
                             </div>
-                            
+
                           </div>
-                       
+
                         </div>
-                    
+
                     </div>
                   </mat-card>
                 </div>
@@ -234,7 +236,7 @@
               </div>
 
               <div class="col-md-12 overflow-auto">
-                    
+
                 <div class="form-group">
                   <label for="exampleFormControlTextarea1" style="color: black">Observations</label>
                   <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
@@ -244,7 +246,7 @@
             </div>
 
           </div>
-          
+
           <div class="row">
             <div class="col-md-12 example-button-container">
                 <button (click)="onSave()" mat-fab style="color: black; background-color: #7f92b2" aria-label="Example icon button with a delete icon">
@@ -259,7 +261,7 @@
 
         </mat-card>
 
-        
+
 
 
       </mat-card>
