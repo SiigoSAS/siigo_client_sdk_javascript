@@ -32,7 +32,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.component';
-import { MatNativeDateModule } from "@angular/material/core";
+import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
 import { InvoicePdfComponent } from './feature/invoice/invoice-pdf/invoice-pdf.component';
 
 
@@ -48,7 +48,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     CoreModule.forRoot(),
     MatCardModule,
     MatInputModule,
-    MatIconModule, 
+    MatIconModule,
     MatButtonModule,
     HttpClientModule,
     MatPaginatorModule,
@@ -59,10 +59,12 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatProgressBarModule,
     MatNativeDateModule,
     NgHttpLoaderModule.forRoot(),
-    
-  
+
+
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'es-CO' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
