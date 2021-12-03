@@ -10,6 +10,7 @@ import { UsersService } from "src/app/services/users.service";
 import { ProductsService } from "src/app/services/products.service";
 import { InvoiceViewModel } from "../models/invoice-view-model";
 import { InvoiceService } from "src/app/services/invoice.service";
+import Swal from 'sweetalert2'
 
 export interface invoice {
   product: string;
@@ -29,22 +30,7 @@ const ELEMENT_DATA: invoice[] = [{ product: "", description: "", amount: "", pri
   styleUrls: ["./create-invoice.component.scss"]
 })
 export class CreateInvoiceComponent implements OnInit, OnDestroy {
-  values: InvoiceViewModel = {
-    price: 0,
-    total: 0,
-    amount: 0,
-    totalB: 0,
-    subTotal: 0,
-    totalNeto: 0,
-    totalPay: 0,
-    selectedProduct: "",
-    documentType: "",
-    date: "",
-    customerIdentification: "",
-    branchOffice: 0,
-    seller: "",
-    paymentId: ""
-  };
+  values: InvoiceViewModel;
 
   paymentTypes: PaymentType[] = [];
   documentTypes: DocumentType[] = [];
@@ -69,7 +55,9 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     private _userService: UsersService,
     private _productsService: ProductsService,
     private _invoiceService: InvoiceService
-  ) {}
+  ) {
+    this.initForm();
+  }
 
   ngOnInit(): void {
     this.paymentTypesSub = this._paymentTypeService.getPaymentTypes().subscribe((payments) => {
@@ -79,6 +67,25 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     this.documentTypesSub = this._documentTypeService.getDocumentTypes().subscribe((documents) => {
       this.documentTypes = documents;
     });
+  }
+
+  initForm(){
+    this.values = {
+      price: 0,
+      total: 0,
+      amount: 0,
+      totalB: 0,
+      subTotal: 0,
+      totalNeto: 0,
+      totalPay: 0,
+      selectedProduct: "",
+      documentType: "",
+      date: "",
+      customerIdentification: "",
+      branchOffice: 0,
+      seller: "",
+      paymentId: ""
+    };
   }
 
   public onDate(event): void {
@@ -115,6 +122,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       .getSellers()
       .pipe(
         map((data) => data.results),
+        map((data) => data.filter((el) => (el.active === true))),
         map((data) => data.map((el) => ({ id: el.id, value: `${el.username} - ${el.first_name}` }))),
         tap(console.log)
       )
@@ -126,41 +134,76 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paymentTypesSub.unsubscribe();
     this.documentTypesSub.unsubscribe();
-    this.customersSub.unsubscribe();
-    this.sellerSub.unsubscribe();
-    this.productSub.unsubscribe();
+  }
+
+  validateForm(){
+    if (this.values.selectedProduct === "" ||
+        this.values.paymentId === "" ||
+        this.values.customerIdentification === "" ||
+        this.values.documentType === ""){
+          Swal.fire({
+            title: 'Error!',
+            text: 'Please, all fields are required',
+            icon: 'warning',
+            confirmButtonText: 'Ok'
+          });
+          return false;
+        }
+        return true;
   }
 
   onSave() {
 
-    const date = new Date().toISOString().slice(0,10);
+    if(this.validateForm()){
+      const date = new Date().toISOString().slice(0,10);
 
-    const invoice = {
-      document: {
-        id: 115057
-      },
-      date: date, //"2020-12-04",
-      customer: {
-        identification: this.values.customerIdentification,
-        branch_office: this.values.branchOffice
-      },
-      seller: this.values.seller,
-      items: [
-        {
-          code: this.values.selectedProduct,
-          quantity: this.values.amount,
-          price: this.values.price
-        }
-      ],
-      payments: [
-        {
-          id: this.values.paymentId,
-          value: this.values.total
-        }
-      ]
-    };
+      const invoice = {
+        document: {
+          id: 115057
+        },
+        date: date, //"2020-12-04",
+        customer: {
+          identification: this.values.customerIdentification,
+          branch_office: this.values.branchOffice
+        },
+        seller: this.values.seller,
+        items: [
+          {
+            code: this.values.selectedProduct,
+            quantity: this.values.amount,
+            price: this.values.price
+          }
+        ],
+        payments: [
+          {
+            id: this.values.paymentId,
+            value: this.values.total
+          }
+        ]
+      };
 
-    this._invoiceService.createInvoice(invoice).subscribe(result => console.log(result));
+      this._invoiceService.createInvoice(invoice).subscribe(result => {
+        if(result?.status){
+          Swal.fire({
+            title: 'Error!',
+            text: 'An error was ocurrer during saving, please try again',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+          return;
+        }
+
+        Swal.fire({
+          title: 'Success!',
+          text: 'The invoice was created succesfully!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+        this.initForm();
+      });
+    }
+
+
   }
 
   onAdd() {}
@@ -187,4 +230,8 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
 
   saveInvoice() {}
+
+  onClose(){
+    this.initForm();
+  }
 }

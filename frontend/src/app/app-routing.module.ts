@@ -49,13 +49,13 @@ const routes: Routes = [
     component:
       ListInvoicesComponent,
     pathMatch: 'full'
-  },  
+  },
   {
     path: 'invoice/:invoiceId',
     component:
     InvoicePdfComponent,
     pathMatch: 'full'
-  },  
+  },
 ];
 
 @NgModule({

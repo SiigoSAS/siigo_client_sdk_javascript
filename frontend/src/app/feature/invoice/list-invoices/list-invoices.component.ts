@@ -50,7 +50,7 @@ export class ListInvoicesComponent implements OnInit {
                   id: item.id,
                   paymentType: item.payments[0].name,
                   documentName: item.name,
-                  date: item.name,
+                  date: item.date,
                   customerIdentification: item.customer.identification,
                   customerName: name,
                   totalPrice: item.total

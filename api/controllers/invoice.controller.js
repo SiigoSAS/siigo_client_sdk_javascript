@@ -42,14 +42,14 @@ exports.getInvoice = async (req, res) => {
         customerIdentification: req.body.customerIdentification,
         customerBranchOffice: req.body.customerBranchOffice,
         name: req.body.name,
-        createdStart: req.body.createdStart,
-        createdEnd: req.body.createdEnd,
+        createdStart: req.body.createdStart || new Date().toISOString().slice(0,10),
+        createdEnd: req.body.createdEnd || new Date().toISOString().slice(0,10),
         dateStart: req.body.dateStart,
         dateEnd: req.body.dateEnd,
         updatedStart: req.body.updatedStart,
         updatedEnd: req.body.updatedEnd,
         page: req.body.page || 1,
-        pageSize: req.body.pageSize || 25
+        pageSize: req.body.pageSize || 25,
       }
 
       const data = await apiInstance.getInvoices(opts)
