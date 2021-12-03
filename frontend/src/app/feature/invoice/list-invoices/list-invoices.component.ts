@@ -7,6 +7,8 @@ import { MatPaginator } from "@angular/material/paginator";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { forkJoin, of } from "rxjs";
 import { ListInvoiceViewModel } from "../models/list-invoice-view-model.interface";
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { InvoicePdfComponent } from "../invoice-pdf/invoice-pdf.component";
 
 @Component({
   selector: "app-list-invoices",
@@ -29,7 +31,10 @@ export class ListInvoicesComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private _invoiceService: InvoiceService, private _customerService: CustomerService, private _router: Router) {
+  constructor(private _invoiceService: InvoiceService, 
+              private _customerService: CustomerService, 
+              private _router: Router,
+              private _dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -71,6 +76,10 @@ export class ListInvoicesComponent implements OnInit {
       });
   }
   openPDF(id: string) {
-    this._router.navigate([`invoice/${id}`])
+    // this._router.navigate([`invoice/${id}`])
+    const dialog = this._dialog.open(InvoicePdfComponent, {
+      data: id,
+      width: '90%'
+    });
   }
 }
