@@ -82,7 +82,7 @@
             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           </table>
           <div class="d-flex">
-            <button class="mx-auto" mat-fab style="color: black; background-color: #7f92b2;" >
+            <button class="mx-auto" mat-fab style="color: black; background-color: #7f92b2;" disabled>
               <mat-icon>add</mat-icon>
             </button>
           </div>
@@ -223,7 +223,7 @@
                 </button>
               </div>
               <div class=" col-md-1 example-button-container">
-                <button mat-fab style="color: black; background-color: #7f92b2" >
+                <button mat-fab style="color: black; background-color: #7f92b2" (click)="onClose()" >
                   <mat-icon>close</mat-icon>
                 </button>
               </div>
