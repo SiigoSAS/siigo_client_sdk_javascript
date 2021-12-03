@@ -132,11 +132,14 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
+
+    const date = new Date().toISOString().slice(0,10);
+
     const invoice = {
       document: {
-        id: parseInt(this.values.documentType)
+        id: 115057
       },
-      date: "2020-12-04",
+      date: date, //"2020-12-04",
       customer: {
         identification: this.values.customerIdentification,
         branch_office: this.values.branchOffice
