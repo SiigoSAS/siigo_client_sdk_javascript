@@ -8,7 +8,7 @@ export interface InvoiceViewModel {
   totalNeto: number,
   selectedProduct: any,
   documentType: string,
-  date: string,
+  date: Date,
   customerIdentification: string,
   branchOffice: number,
   seller: string,

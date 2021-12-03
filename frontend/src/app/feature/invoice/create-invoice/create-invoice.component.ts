@@ -11,6 +11,7 @@ import { ProductsService } from "src/app/services/products.service";
 import { InvoiceViewModel } from "../models/invoice-view-model";
 import { InvoiceService } from "src/app/services/invoice.service";
 import Swal from 'sweetalert2'
+import { formatDate } from "@angular/common";
 
 export interface invoice {
   product: string;
@@ -80,7 +81,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       totalPay: 0,
       selectedProduct: "",
       documentType: "",
-      date: "",
+      date: new Date(),
       customerIdentification: "",
       branchOffice: 0,
       seller: "",
@@ -155,13 +156,11 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   onSave() {
 
     if(this.validateForm()){
-      const date = new Date().toISOString().slice(0,10);
-
       const invoice = {
         document: {
           id: 115057
         },
-        date: date, //"2020-12-04",
+        date: this.values.date.toISOString().slice(0,10), //"2020-12-04",
         customer: {
           identification: this.values.customerIdentification,
           branch_office: this.values.branchOffice
