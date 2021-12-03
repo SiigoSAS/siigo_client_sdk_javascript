@@ -24,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -58,6 +59,7 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatNativeDateModule,
+    MatDialogModule,
     NgHttpLoaderModule.forRoot(),
 
 

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-invoice-pdf',
@@ -9,11 +10,17 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 })
 export class InvoicePdfComponent implements OnInit {
   id: any = "";
-  constructor(private _activeRoute: ActivatedRoute, private _invoiceService: InvoiceService) { }
+  constructor(private _activeRoute: ActivatedRoute, 
+              private _invoiceService: InvoiceService,
+              public dialogRef: MatDialogRef<InvoicePdfComponent>,
+              @Inject(MAT_DIALOG_DATA) public data) { }
   isCharging: boolean = true;
 
   ngOnInit(): void {
-    this.id = this._activeRoute.snapshot.params.invoiceId;
+    // this.id = this._activeRoute.snapshot.params.invoiceId;
+    this.id = this.data;
+    console.log(this.id);
+    
     this._invoiceService.getInvoicePDF(this.id).subscribe(
       (res) => {
         console.log("Get it!");
