@@ -1,0 +1,27 @@
+name: NodeJS with Grunt
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+   
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Build
+      run: |
+        cd frontend && npm install && ng build --prod
+        cd ../api && npm install 
+    - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+         heroku_app_name: "testing-sad-app" #Must be unique in Heroku
+         heroku_email: ${{secrets.EMAIL}}
