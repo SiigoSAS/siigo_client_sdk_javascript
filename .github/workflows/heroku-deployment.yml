@@ -3,9 +3,7 @@ name: NodeJS with Grunt
 on:
   push:
     branches: [ dev ]
-defaults:
-  run:
-    working-directory: ./api
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,11 +19,12 @@ jobs:
     - name: Build
       run: |
         npm i -g @angular/cli
-        cd ../frontend && npm install && ng build --prod
+        cd ./frontend && npm install && ng build --prod
         cd ../api && npm install 
 
     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
+        path: ./api
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
         heroku_app_name: "testing-sad-app" #Must be unique in Heroku
         heroku_email: ${{secrets.EMAIL}}
