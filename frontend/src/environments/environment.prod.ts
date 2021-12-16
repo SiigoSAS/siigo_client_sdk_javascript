@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndpoint: '/api',
+  apiEndpoint: 'https://demo-sdk-javascriipt.herokuapp.com/api/',
 };

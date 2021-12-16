@@ -4,7 +4,7 @@ const router = require('express').Router()
 // Set default API response
 router.get('/', function (req, res) {
   res.json({
-    status: 'Siigo API Client Its Working',
+    status: 'Siigo API Client Its Working Fine!!',
     message: 'Welcome to RESTHub crafted with love!'
   })
 })
