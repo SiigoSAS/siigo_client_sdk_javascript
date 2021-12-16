@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiEndpoint: '/api',
+  apiEndpoint: 'https://testing-sad-app.herokuapp.com/api/',
 };

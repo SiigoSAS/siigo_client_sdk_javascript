@@ -7,7 +7,7 @@
 
 # dependencies
 /node_modules
-
+/public
 
 # IDEs and editors
 /.idea
