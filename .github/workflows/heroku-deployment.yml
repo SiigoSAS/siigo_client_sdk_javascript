@@ -26,5 +26,5 @@ jobs:
       with:
         appdir: "./api"
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "testing-sad-app" #Must be unique in Heroku
+        heroku_app_name: "demo-sdk-javascriipt" #Must be unique in Heroku
         heroku_email: ${{secrets.EMAIL}}
