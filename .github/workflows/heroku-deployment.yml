@@ -20,8 +20,10 @@ jobs:
       run: |
         npm i -g @angular/cli@12.2.12
         cd ./frontend && npm install && ng build --prod
-        cd ../api && npm install 
+        cd ../api && npm install
 
+    - run: |
+          echo "::set-env name=directory::api"
     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
         appdir: "./api"
