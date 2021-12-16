@@ -18,8 +18,10 @@ jobs:
 
     - name: Build
       run: |
+        npm i -g @angular/cli
         cd frontend && npm install && ng build --prod
         cd ../api && npm install 
+
     - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       with:
         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
