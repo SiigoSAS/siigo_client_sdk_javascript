@@ -3,3 +3,4 @@ mongo/db
 .env
 .vscode
 /public
+/api/package-lock.json
