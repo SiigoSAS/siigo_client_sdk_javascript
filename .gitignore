@@ -4,3 +4,4 @@ mongo/db
 .vscode
 /public
 /api/package-lock.json
+/frontend/package-lock.json
