@@ -1,5 +1,5 @@
 import { Component, OnInit, NgModule } from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { UserService } from '../../core/services/user.service';
@@ -12,7 +12,7 @@ import { UserService } from '../../core/services/user.service';
 })
 export class AuthComponent implements OnInit {
 
-  username = new FormControl('', [Validators.required]);
+  username = new UntypedFormControl('', [Validators.required]);
   hide = true;
   authData: any;
   message: string='';
