@@ -62,7 +62,6 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes, {
       initialNavigation: "enabledNonBlocking",
-      relativeLinkResolution: "legacy"
     })
   ],
   exports: [RouterModule]
