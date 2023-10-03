@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { InvoiceService } from "src/app/services/invoice.service";
 import { Router } from "@angular/router";
-import { MatLegacyTableDataSource as MatTableDataSource } from "@angular/material/legacy-table";
+import { MatTableDataSource } from "@angular/material/table";
 import { CustomerService } from "../../../services/customer.service";
-import { MatLegacyPaginator as MatPaginator } from "@angular/material/legacy-paginator";
+import { MatPaginator } from "@angular/material/paginator";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { forkJoin, of } from "rxjs";
 import { ListInvoiceViewModel } from "../models/list-invoice-view-model.interface";
-import {MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA} from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { InvoicePdfComponent } from "../invoice-pdf/invoice-pdf.component";
 
 @Component({
@@ -59,7 +59,7 @@ export class ListInvoicesComponent implements OnInit {
                   customerIdentification: item.customer.identification,
                   customerName: name,
                   totalPrice: item.total
-                 };
+                };
               })
             );
           });
