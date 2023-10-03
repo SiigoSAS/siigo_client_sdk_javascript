@@ -1,7 +1,4 @@
-// auhtController.js
-// Import user model
 const SiigoApi = require('siigo_api')
-// Handle index actions
 const environment = require('../config/environment')
 
 exports.login = async function (req, res) {
@@ -23,11 +20,11 @@ exports.login = async function (req, res) {
       data: { Authentication: 'Authentication Successfully' }
     })
   } catch (error) {
-    res.json({
+    res.status(401).json({
       status: 'error',
       message: {
         Authentication: 'Authentication failed',
-        error: error
+        error: "Invalid username or access_key"
       }
     })
   }

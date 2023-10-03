@@ -30,7 +30,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 //SERVICE COMPONENTS
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
@@ -61,8 +61,6 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatNativeDateModule,
     MatDialogModule,
     NgHttpLoaderModule.forRoot(),
-
-
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-CO' }
