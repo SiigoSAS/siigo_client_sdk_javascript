@@ -11,7 +11,6 @@ import { ProductsService } from "src/app/services/products.service";
 import { InvoiceViewModel } from "../models/invoice-view-model";
 import { InvoiceService } from "src/app/services/invoice.service";
 import Swal from 'sweetalert2'
-import { formatDate } from "@angular/common";
 import { SearchListBarComponent } from "@shared/search-list-bar/search-list-bar.component";
 
 export interface invoice {
@@ -167,7 +166,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
     if(this.validateForm()){
       const invoice = {
         document: {
-          id: 115057
+          id: this.values.documentType
         },
         date: this.values.date.toISOString().slice(0,10), //"2020-12-04",
         customer: {
