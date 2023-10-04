@@ -16,21 +16,21 @@ import { CreateProductComponent } from './feature/product/create-product/create-
 //ANGULAR MATERIAL COMPONENTS
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
 
 //SERVICE COMPONENTS
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ListInvoicesComponent } from './feature/invoice/list-invoices/list-invoices.component';
 import { LeftSidebarComponent } from './feature/home/left-sidebar/left-sidebar.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from "@angular/material/core";
@@ -61,8 +61,6 @@ import { NgHttpLoaderModule } from 'ng-http-loader';
     MatNativeDateModule,
     MatDialogModule,
     NgHttpLoaderModule.forRoot(),
-
-
   ],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'es-CO' }

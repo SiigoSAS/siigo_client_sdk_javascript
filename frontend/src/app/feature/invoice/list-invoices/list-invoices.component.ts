@@ -7,7 +7,7 @@ import { MatPaginator } from "@angular/material/paginator";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { forkJoin, of } from "rxjs";
 import { ListInvoiceViewModel } from "../models/list-invoice-view-model.interface";
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { InvoicePdfComponent } from "../invoice-pdf/invoice-pdf.component";
 
 @Component({
@@ -59,7 +59,7 @@ export class ListInvoicesComponent implements OnInit {
                   customerIdentification: item.customer.identification,
                   customerName: name,
                   totalPrice: item.total
-                 };
+                };
               })
             );
           });

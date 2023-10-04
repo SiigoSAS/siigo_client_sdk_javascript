@@ -28,7 +28,7 @@ exports.createInvoice = async function (req, res) {
     res.json({
       status: "Error",
       message: "Something was wrong",
-      error: error
+      error: error.body
     });
   }
 };

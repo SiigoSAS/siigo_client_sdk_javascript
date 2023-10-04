@@ -8,7 +8,6 @@ import { AuthGuard } from "./guards/index";
 import { JwtInterceptorProvider, ErrorInterceptorProvider } from "./helpers/index";
 import { LayoutModule } from "./layout/layout.module";
 import { UserService } from "./services";
-import { ValidaionErrorsModule } from "./components/validation-errors/validation-errors.module";
 import { NumberOnlyDirective } from "./directives/number-only.directive";
 
 @NgModule({
@@ -16,27 +15,10 @@ import { NumberOnlyDirective } from "./directives/number-only.directive";
     CommonModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    LayoutModule,
-    ValidaionErrorsModule.forRoot({
-      errors: {
-        useFactory() {
-          return {
-            required: 'This field is required',
-            minlength: ({ requiredLength, actualLength }) => `Expect ${requiredLength} but got ${actualLength}`,
-            invalidEmailAddress: error => `Email Address is not valid`,
-            invalidMobile: error => `Invalid Mobile number`,
-            invalidPassword: error => `Password is weak`,
-            passwordMustMatch: error => `Password is not matching`,
-          };
-        },
-        deps: []
-      }
-      //controlErrorComponent: CustomControlErrorComponent, // Uncomment to see errors being rendered using a custom component
-      //controlErrorComponentAnchorFn: controlErrorComponentAnchorFn // Uncomment to see errors being positioned differently
-    })
+    LayoutModule
   ],
   declarations: [AlertComponent, NumberOnlyDirective],
-  exports: [AlertComponent, ToastrModule, LayoutModule, NumberOnlyDirective, ValidaionErrorsModule]
+  exports: [AlertComponent, ToastrModule, LayoutModule, NumberOnlyDirective]
 })
 export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {

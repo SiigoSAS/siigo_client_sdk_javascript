@@ -6,7 +6,7 @@ const environment = require('../config/environment')
 
 exports.getUsers = async (req, res) => {
   try {
-    const apiInstance = new SiigoInstance.SiigoApi.UsersApi()
+    const apiInstance = new SiigoInstance.SiigoApi.UserApi()
     const opts = {
       page: req.body.page,
       pageSize: req.body.pageSize
