@@ -41,6 +41,9 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    env:
+      BASE_PATH: ${{secrets.BASE_PATH}} 
+      URL_SIGN_IN: ${{secrets.URL_SIGN_IN}}      
 
     steps:
       - name: Download artifact from build job
