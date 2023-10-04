@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <app-left-sidebar
+      class="col-md-1"
+      style="background-color: rgb(0, 157, 255); height: 100vh;"
+    ></app-left-sidebar>
+
+    <div
+      class="col-md-11 overflow-auto"
+      style="background-color: #ffffff; height: 100vh;"
+    >
+      <div class="table mt-4">
+        <mat-form-field
+          class="w-100 text-center"
+          appearance="standard"
+          style="background-color: white; min-height: 9vh;"
+        >
+          <mat-label style=" font-size: 14px;">
+            <mat-icon style="font-size: 14px;">search</mat-icon>
+            Search
+          </mat-label>
+          <input matInput (keyup)="applyFilter($event)" #input />
+        </mat-form-field>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="paymentType">
+            <th mat-header-cell *matHeaderCellDef>Payment Types</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.paymentType }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="documentName">
+            <th mat-header-cell *matHeaderCellDef>Document Name</th>
+            <td mat-cell *matCellDef="let element">
+              <button class="" mat-icon-button (click)="openPDF(element.id)">
+                <mat-icon class="" style="font-size: 20px;"
+                  >picture_as_pdf</mat-icon
+                >
+              </button>
+              {{ element.documentName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="date">
+            <th mat-header-cell *matHeaderCellDef>Date</th>
+            <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerIdentification">
+            <th mat-header-cell *matHeaderCellDef>Customer Identification</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.customerIdentification }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="customerName">
+            <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.customerName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="totalPrice">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.totalPrice | currency }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+          <tr class="mat-row" *matNoDataRow>
+            <ng-http-loader></ng-http-loader>
+          </tr>
+        </table>
+        <mat-paginator
+          [pageSizeOptions]="[20, 40, 50]"
+          showFirstLastButtons
+          aria-label="Select page"
+        >
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

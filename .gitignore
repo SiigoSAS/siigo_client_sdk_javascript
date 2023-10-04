@@ -1,3 +1,9 @@
 data
 mongo/db
 .env
+.vscode
+/public
+/api/package-lock.json
+/frontend/package-lock.json
+/api/pnpm-lock.yaml
+/frontend/pnpm-lock.yaml

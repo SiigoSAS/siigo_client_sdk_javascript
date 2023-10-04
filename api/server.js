@@ -18,19 +18,19 @@ app.use(bodyParser.json());
 //console.log("connection string", environment.mongodb.uri);
 //console.log("secret", environment.secret);
 //mongoose.connect(environment.mongodb.uri, {
-  //useUnifiedTopology: true,
-  //useNewUrlParser: true
+//useUnifiedTopology: true,
+//useNewUrlParser: true
 //});
 //mongoose.Promise = global.Promise;
 
 // On connection error
 //mongoose.connection.on("error", (error) => {
-  //console.log("Database error: ", error);
+//console.log("Database error: ", error);
 //});
 
 // On successful connection
 //mongoose.connection.on("connected", () => {
-  //console.log("Connected to database");
+//console.log("Connected to database");
 //});
 
 // addtional configuration when serving Angular SPA (static reource and Anugalr routing)
@@ -49,23 +49,32 @@ const allowedExt = [
   ".txt"
 ];
 
-
 // Import routes
 let apiRoutes = require("./api-routes");
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve("public/index.html"));
+});
+
 // Use Api routes in the App
 app.use("/api", apiRoutes);
 
+app.use(express.static("public")); //a diferencia de upload, aca no damos permiso de guardar cosas sino solo de usarlo
 
 app.get("*", (req, res) => {
-  if (allowedExt.filter((ext) => req.url.indexOf(ext) > 0).length > 0) {
-    res.sendFile(path.resolve(`public/${req.url}`));
-  } else {
-    res.sendFile(path.resolve("public/index.html"));
-  }
+  res.sendFile(path.resolve(__dirname, "public/index.html"));
 });
 
+//app.get("*g", (req, res) => {
+//  if (allowedExt.filter((ext) => req.url.indexOf(ext) > 0).length > 0) {
+//    res.sendFile(path.resolve(`public/${req.url}`));
+//  } else {
+//    res.sendFile(path.resolve("public/index.html"));
+//  }
+//});
+
 // use JWT auth to secure the api, the token can be passed in the authorization header or querystring
-app.use(
+/* app.use(
   expressJwt({
     secret: environment.secret,
     algorithms: ["HS256"],
@@ -90,15 +99,12 @@ app.use(
     ]
   })
 );
-
-
-
-
+ */
 
 const HOST = "0.0.0.0";
 // start server
 // Launch app to listen to specified port
-const server = app.listen(process.env.EXPRESS_PORT || 3000, HOST, () => {
+const server = app.listen(process.env.PORT || 3000, HOST, () => {
   const PORT = server.address().port;
   console.log(`Running  on http://${HOST}:${PORT}`);
 });
