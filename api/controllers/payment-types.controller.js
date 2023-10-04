@@ -5,7 +5,7 @@ const SiigoInstance = require('./auth.controller')
 const environment = require('../config/environment')
 exports.getPaymentTypes = async (req, res) => {
   try {
-    const apiInstance = new SiigoInstance.SiigoApi.PaymentTypesApi()
+    const apiInstance = new SiigoInstance.SiigoApi.PaymentTypeApi()
     const opts = {
       documentType: req.params.type
     }

@@ -5,7 +5,6 @@ const SiigoInstance = require('./auth.controller')
 const environment = require('../config/environment')
 
 exports.getCustomer = async (req, res) => {
-  let data = {}
   if (req.params.id == undefined) {
     try {
       const apiInstance = new SiigoInstance.SiigoApi.CustomerApi()
@@ -25,7 +24,7 @@ exports.getCustomer = async (req, res) => {
         pageSize: req.body.pageSize
       }
 
-      data = await apiInstance.getCustomers(opts)
+      const data = await apiInstance.getCustomers(opts)
       res.status(200).json(data)
     } catch (error) {
       res.json({

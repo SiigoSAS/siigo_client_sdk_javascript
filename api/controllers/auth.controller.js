@@ -1,4 +1,4 @@
-const SiigoApi = require('siigo_api')
+const SiigoApi = require('siigo_api');
 const environment = require('../config/environment')
 
 exports.login = async function (req, res) {
