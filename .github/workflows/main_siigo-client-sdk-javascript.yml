@@ -24,7 +24,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           npm i -g @angular/cli@16.2.4
-          cd ./frontend && npm install && ng build --prod
+          cd ./frontend && npm install && ng build --configuration=production
           cd ../api && npm install          
 
       - name: Upload artifact for deployment job
