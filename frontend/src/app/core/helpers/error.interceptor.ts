@@ -15,7 +15,12 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (errorResponse instanceof HttpErrorResponse) {
           switch (errorResponse.status) {
             case 401: // login
-              this.toastrService.error("Invalid username or access_key", "Authentication failed");
+              if(errorResponse.error?.message?.Authentication){
+                this.toastrService.error(errorResponse.error?.message.error, errorResponse.error?.message.Authentication);
+              } else {
+                this.toastrService.error("Invalid username or access_key", "Authentication failed");
+              }
+              
               this._router.navigate([""]);
               break;
             case 400: // forbidden

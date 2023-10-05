@@ -15,7 +15,8 @@ module.exports = {
   },
   secret: process.env.SECRET,
   path: {
-	sign:process.env.URL_SIGN_IN,
-	api:process.env.BASE_PATH
- }
+    sign: process.env.URL_SIGN_IN,
+    api: process.env.BASE_PATH,
+  },
+  validUserNames: process.env.VALID_USER_NAME,
 };
