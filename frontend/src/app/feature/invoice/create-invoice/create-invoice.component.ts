@@ -12,6 +12,8 @@ import { InvoiceViewModel } from "../models/invoice-view-model";
 import { InvoiceService } from "src/app/services/invoice.service";
 import Swal from 'sweetalert2'
 import { SearchListBarComponent } from "@shared/search-list-bar/search-list-bar.component";
+import { ICustomer } from "./interfaces/customer-interface";
+import { IProduct } from "@core/models/produc-interface";
 
 export interface invoice {
   product: string;
@@ -35,9 +37,9 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
 
   paymentTypes: PaymentType[] = [];
   documentTypes: DocumentType[] = [];
-  customers: [];
+  customers: ICustomer[];
   sellers: [];
-  products: [];
+  products: IProduct[];
   displayedColumns: string[] = ["product", "description", "amount", "price", "discount", "taxes", "total"];
   dataSource = ELEMENT_DATA;
 
@@ -64,8 +66,12 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.paymentTypesSub = this._paymentTypeService.getPaymentTypes().subscribe((payments) => {
-      this.paymentTypes = payments;
+    this.paymentTypesSub = this._paymentTypeService.getPaymentTypes().subscribe((payments: PaymentType[]) => {
+      this.paymentTypes = payments.filter(
+        (payment: PaymentType) =>
+          payment.active &&
+          payment.due_date == false
+      );
     });
 
     this.documentTypesSub = this._documentTypeService.getDocumentTypes().subscribe((documents) => {
@@ -76,12 +82,13 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   initForm(){
     this.values = {
       price: 0,
+      totalWithFormat: "0",
       total: 0,
       amount: 0,
-      totalB: 0,
-      subTotal: 0,
-      totalNeto: 0,
-      totalPay: 0,
+      totalB: "0",
+      subTotal: "0",
+      totalNeto: "0",
+      totalPay: "0",
       selectedProduct: "",
       documentType: "",
       date: new Date(),
@@ -102,6 +109,7 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
 
   selectCustomer(customerSelected) {
     this.values.customerIdentification = customerSelected;
+    this.values.branchOffice = this.customers.filter((el) => el.id === customerSelected)[0].branchOffice;
   }
 
   selectSeller(sellerSelected) {
@@ -109,7 +117,8 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
 
   selectProduct(selectedProduct) {
-    this.values.selectedProduct = selectedProduct;
+    this.values.selectedProduct = this.products.filter((el: IProduct) => el.id === selectedProduct)[0];
+    this.calculate();
   }
 
   getSuggestionCustomer() {
@@ -117,7 +126,11 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       .getCustomers()
       .pipe(
         map((data) => data.results.filter((el) => el.name)),
-        map((data) => data.map((el) => ({ id: el.identification, value: `${el.identification} - ${el.name[0]}` })))
+        map((data) => data.map((el) => ({
+          id: el.identification,
+          value: `${el.identification} - ${el.name[0]}`,
+          branchOffice: el.branch_office
+        })))        
       )
       .subscribe((data) => {
         this.customers = data.slice(0, 3);
@@ -176,9 +189,9 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
         seller: this.values.seller,
         items: [
           {
-            code: this.values.selectedProduct,
-            quantity: this.values.amount,
-            price: this.values.price
+            code: this.values.selectedProduct.id,
+            quantity: this.values.selectedProduct.amount,
+            price: this.values.selectedProduct.price
           }
         ],
         payments: [
@@ -220,7 +233,13 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
       .getProducts()
       .pipe(
         map((data) => data.results),
-        map((data) => data.map((el) => ({ id: el.code, value: `${el.code} - ${el.name}` }))),
+        map((data) => data.map((el) => ({
+          id: el.code,
+          value: `${el.name}`,
+          name: el.name,
+          price: el.prices[0].price_list[0].value,
+          amount: el.available_quantity
+        }))),
         tap(console.log)
       )
       .subscribe((data) => {
@@ -229,11 +248,33 @@ export class CreateInvoiceComponent implements OnInit, OnDestroy {
   }
 
   calculate() {
-    this.values.total = this.values.amount * this.values.price;
-    this.values.totalB = this.values.total;
-    this.values.subTotal = this.values.total;
-    this.values.totalNeto = this.values.total;
-    this.values.totalPay = this.values.total;
+    if(!this.values.selectedProduct.amount && !this.values.selectedProduct.price) {
+      return;
+    }
+
+    this.values.selectedProduct.amount =
+      this.values.selectedProduct.amount < 0 ? this.values.selectedProduct.amount*-1 : this.values.selectedProduct.amount;
+    this.values.selectedProduct.price =
+      this.values.selectedProduct.price < 0 ? this.values.selectedProduct.price*-1 : this.values.selectedProduct.price;
+
+    const formatter = this.formatter();
+    const total = this.values.selectedProduct.amount * this.values.selectedProduct.price;
+
+    this.values.total = total;
+    this.values.totalWithFormat = formatter.format(total);
+    this.values.totalB = this.values.totalWithFormat
+    this.values.subTotal = this.values.totalWithFormat
+    this.values.totalNeto = this.values.totalWithFormat
+    this.values.totalPay = this.values.totalWithFormat
+  }
+
+  formatter(){
+    const formatting_options = {
+      style: 'currency',
+      currency: 'COP',
+      minimumFractionDigits: 3,
+   }
+   return new Intl.NumberFormat("en-US", formatting_options);
   }
 
   saveInvoice() {}

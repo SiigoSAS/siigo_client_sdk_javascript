@@ -144,7 +144,8 @@
                 <div class="w-75">
                   <input
                     (keyup)="calculate()"
-                    [(ngModel)]="values.amount"
+                    (change)="calculate()"
+                    [(ngModel)]="values.selectedProduct.amount"
                     class="form-control text-center"
                     type="number"
                     placeholder="0"
@@ -162,7 +163,8 @@
                 <div class="w-75">
                   <input
                     (keyup)="calculate()"
-                    [(ngModel)]="values.price"
+                    (change)="calculate()"
+                    [(ngModel)]="values.selectedProduct.price"
                     class="form-control text-center"
                     type="number"
                     placeholder="0"
